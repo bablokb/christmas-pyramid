@@ -14,8 +14,8 @@ include <dimensions.scad>
 z_motor = 19;
 
 do_support = 7;                    // motor support
-di_support = do_support - 2*w4;
-ox_support = 17.5;                // offset of support: 35/2
+di_support = 2.5;                  // screw: 2.6
+ox_support = 17.5;                 // offset of support: 35/2
 oy_support = -8;
 z_support  = z_motor + 10;
 
