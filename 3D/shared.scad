@@ -44,7 +44,7 @@ ys_pcb = 3;        // y_screw
 // ---------------------------------------------------------------------------
 // dimensions of pyramid base
 
-x_bottom = 100;                               // radius
+x_bottom = 85;                                // radius
 y_bottom = sqrt(3/4*x_bottom*x_bottom);
 h_bottom =   b;
 c_bottom = h_bottom;                          // chamfering
