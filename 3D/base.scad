@@ -52,7 +52,7 @@ module base() {
   // support for motor
   motor_support();
   // pcb-holder, moved to the back side
-  ymove(y_bottom - pcb_holder_dim(y_pcb)/2)
+  ymove(y_bottom - pcb_holder_dim(y_pcb)/2 - po_bottom)
      pcb_holder(x_pcb=x_pcb,   y_pcb=y_pcb,
              x_screw = xl_pcb, y_screw = ys_pcb);
   // posts for the next level
