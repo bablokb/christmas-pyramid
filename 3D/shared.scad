@@ -54,8 +54,9 @@ pr_bottom = 5;                                // radius of posts
 pc_bottom = 1.6;                              // radius of cone above post
 po_bottom = 2*c_bottom+pr_bottom;             // offset of posts
 
+wc_bottom = 0.6;                              // cutout depth for walls
 wx_bottom = x_bottom-po_bottom -              // full width -
             2*(pr_bottom-2*pc_bottom) -       // 2x inner width of post -
 	    2*gap;                            // 2x gap
-wy_bottom = z_bottom-b/2;
+wy_bottom = z_bottom-b + 2*wc_bottom - gap;   // wall height (orthogonal)
 wh_bottom = 1.6;                              // wall height (printed flat)
