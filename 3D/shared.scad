@@ -22,13 +22,11 @@ z_support  = z_motor + 10;
 // ---------------------------------------------------------------------------
 // motor shaft dimensions
 
-d1_shaft = 9 + gap;
-d2_shaft = 5 + gap;
-d3_shaft = 3 + gap;
-x_shaft = d2_shaft;
-y_shaft = d3_shaft;
+d1_shaft = 9 + gap;     // shaft at bottom (motor-side, circle-shaped)
 z1_shaft = 1.5;
+d2_shaft = 5 + gap;     // shaft above bottom (circle-shaped)
 z2_shaft = 4;
+d3_shaft = 3 + gap;     // shaft at top (flat)
 z3_shaft = 6;
 
 // ---------------------------------------------------------------------------
@@ -48,15 +46,22 @@ x_bottom = 85;                                // radius
 y_bottom = sqrt(3/4*x_bottom*x_bottom);
 h_bottom =   b;
 c_bottom = h_bottom;                          // chamfering
-z_bottom = z_support + z2_shaft + z3_shaft;
+z_bottom = z_support + 1 + z1_shaft + z2_shaft + z3_shaft;
 
+// ---------------------------------------------------------------------------
+// posts
 pr_bottom = 5;                                // radius of posts
-pc_bottom = 1.6;                              // radius of cone above post
+pc_bottom = 3;                                // radius of cone above post
+zc_bottom = 2*b;                              // height of cone above post
 po_bottom = 2*c_bottom+pr_bottom;             // offset of posts
 
-wc_bottom = 0.6;                              // cutout depth for walls
-wx_bottom = x_bottom-po_bottom -              // full width -
-            2*(pr_bottom-2*pc_bottom) -       // 2x inner width of post -
-	    2*gap;                            // 2x gap
-wy_bottom = z_bottom-b + 2*wc_bottom - gap;   // wall height (orthogonal)
-wh_bottom = 1.6;                              // wall height (printed flat)
+// ---------------------------------------------------------------------------
+// walls (printed flat, i.e. y is height (z) dimension
+
+wyc_bottom = 0.6;                             // cutout depth below walls
+wxc_bottom = pc_bottom;                       // cutout depth within posts
+wx_bottom = x_bottom-po_bottom -              // width of post-hexagon -
+            2*(pr_bottom-wxc_bottom)          // 2x (radius-width_of_cutouts)
+	    - 2*gap;                          // - 2x gap
+wy_bottom = z_bottom-b + 2*wyc_bottom - gap;  // wall height (orthogonal)
+wz_bottom = 1.6;                              // wall height (printed flat)

@@ -38,22 +38,22 @@ module post(h,r,twist=120) {
         linear_extrude(h,twist=twist) star(n=8, r=r, step=2);
       }
       // cone above post
-      zmove(h-fuzz) cyl(b,pc_bottom);
+      zmove(h-fuzz) cyl(zc_bottom,pc_bottom);
     }
     // cutouts for walls
-    zrot(30) ymove(pr_bottom-2*pc_bottom)
-        cuboid([wh_bottom+gap,10,h+b+fuzz], anchor=BOTTOM+FRONT);
-    zrot(-30) ymove(-pr_bottom+2*pc_bottom)
-        cuboid([wh_bottom+gap,10,h+b+fuzz], anchor=BOTTOM+BACK);
+    zrot(30) ymove(pr_bottom-wxc_bottom)
+        cuboid([wz_bottom+gap,10,h+b+fuzz], anchor=BOTTOM+FRONT);
+    zrot(-30) ymove(-pr_bottom+wxc_bottom)
+        cuboid([wz_bottom+gap,10,h+b+fuzz], anchor=BOTTOM+BACK);
   }
 }
 
 // --- wall cutout   ---------------------------------------------------------
 
 module wall_cutout() {
-  zmove(b-wc_bottom)
-    linear_extrude(wc_bottom+fuzz)
-      ring(n=6,r=x_bottom-po_bottom-wh_bottom/2-gap,ring_width=wh_bottom+2*gap);
+  zmove(b-wyc_bottom)
+    linear_extrude(wyc_bottom+fuzz)
+      ring(n=6,r=x_bottom-po_bottom-wz_bottom/2-gap,ring_width=wz_bottom+2*gap);
 }
 
 // --- base plate   ----------------------------------------------------------
