@@ -29,9 +29,14 @@ module motor_support() {
 module post(h,r,twist=120) {
   difference() {
     union() {
-      // post (supershape is very slow in rendering)
-      // linear_extrude(h,twist=twist) supershape(.5,m1=8,n1=1,r=r);
-      cyl(h,r, anchor=BOTTOM+CENTER);
+      // post
+      if ($preview) {
+        cyl(h,r, anchor=BOTTOM+CENTER);
+      } else {
+        // supershape is very slow in rendering
+        // linear_extrude(h,twist=twist) supershape(.5,m1=8,n1=1,r=r);
+        linear_extrude(h,twist=twist) star(n=8, r=r, step=2);
+      }
       // cone above post
       zmove(h-fuzz) cyl(b,pc_bottom);
     }
