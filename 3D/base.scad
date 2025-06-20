@@ -43,18 +43,30 @@ module post(h,r,twist=120) {
   }
 }
 
+// --- wall cutout   ---------------------------------------------------------
+
+module wall_cutout() {
+  zmove(b-wc_bottom)
+    linear_extrude(wc_bottom+fuzz)
+      ring(n=6,r=x_bottom-po_bottom-wh_bottom/2-gap,ring_width=wh_bottom+2*gap);
+}
+
 // --- base plate   ----------------------------------------------------------
 
 module base() {
   // base-plate
-  regular_prism(6,h_bottom,x_bottom,chamfer2=c_bottom,
-          anchor=BOTTOM+CENTER);
+  difference() {
+    regular_prism(6,h_bottom,x_bottom,chamfer2=c_bottom,
+            anchor=BOTTOM+CENTER);
+    wall_cutout();
+  }
   // support for motor
   motor_support();
-  // pcb-holder, moved to the back side
+  // pcb-holder, moved and rotated to the back side
   ymove(y_bottom - pcb_holder_dim(y_pcb)/2 - po_bottom)
-     pcb_holder(x_pcb=x_pcb,   y_pcb=y_pcb,
-             x_screw = xl_pcb, y_screw = ys_pcb);
+    zrot(180)
+      pcb_holder(x_pcb=x_pcb,   y_pcb=y_pcb,
+                 xl_screw = xl_pcb, xr_screw = xr_pcb, y_screw = ys_pcb);
   // posts for the next level
   for (r = [0:60:300]) {
     zrot(r) xmove(x_bottom-po_bottom) post(z_bottom,pr_bottom);
@@ -65,3 +77,5 @@ module base() {
 
 base();
 //post(z_bottom,pr_bottom);
+//pcb_holder(x_pcb=x_pcb,   y_pcb=y_pcb,
+//             xl_screw = xl_pcb, xr_screw = xr_pcb, y_screw = ys_pcb);
