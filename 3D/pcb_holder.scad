@@ -85,5 +85,9 @@ module pcb_holder(
       // walls around pcb
       rect_tube(size=[x_case,y_case],wall=w4,h=b+z_pcb+z_support,anchor=BOTTOM+CENTER);
     }
+    x_sd = 15;
+    move([-pcb_holder_dim(x_pcb)/2+x_sd/2+w4,
+          -pcb_holder_dim(y_pcb)/2+w2,
+          0]) cuboid([x_sd,2*w4,pcb_holder_z()+fuzz],anchor=BOTTOM+CENTER);
   }
 }
