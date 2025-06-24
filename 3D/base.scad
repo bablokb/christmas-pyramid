@@ -45,6 +45,9 @@ module post(h,r,twist=120) {
         cuboid([wz_bottom+gap,10,h+b+fuzz], anchor=BOTTOM+FRONT);
     zrot(-30) ymove(-pr_bottom+wxc_bottom)
         cuboid([wz_bottom+gap,10,h+b+fuzz], anchor=BOTTOM+BACK);
+    // cutouts for LED-cable
+    zrot(-90) zmove(0.67*h+b) ymove(0)
+        cuboid([wz_bottom+gap,10,h/3+b+fuzz], anchor=BOTTOM+BACK);
   }
 }
 
@@ -68,7 +71,7 @@ module base() {
   // support for motor
   motor_support();
   // pcb-holder, moved and rotated to the back side
-  ymove(y_bottom - pcb_holder_dim(y_pcb)/2 - po_bottom)
+  ymove(y_bottom - pcb_holder_dim(y_pcb)/2 - po_bottom + gap)
     zrot(180)
       pcb_holder(x_pcb=x_pcb,   y_pcb=y_pcb,
                  xl_screw = xl_pcb, xr_screw = xr_pcb, y_screw = ys_pcb);
