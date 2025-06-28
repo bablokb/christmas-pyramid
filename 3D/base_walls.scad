@@ -39,19 +39,28 @@ module wall() {
 // --- wall for PCB   --------------------------------------------------------
 
 module wall_pcb() {
+  off_corners = 6;
+  h_cutouts = wz_bottom+2*fuzz;
   difference() {
     wall();
     // cutouts
     // SD-card
     move([+wx_bottom/2-x_sd/2+fuzz,-wy_bottom/2+y_sd/2-fuzz,-fuzz])
-      cuboid([x_sd,y_sd,wz_bottom+2*fuzz], anchor=BOTTOM+CENTER);
+      cuboid([x_sd,y_sd,h_cutouts], anchor=BOTTOM+CENTER);
     // USB-C
     move([0,-wy_bottom/2+y_usb/2+yo_usb,-fuzz])
-      cuboid([x_usb,y_usb,wz_bottom+2*fuzz], anchor=BOTTOM+CENTER);
+      cuboid([x_usb,y_usb,h_cutouts], anchor=BOTTOM+CENTER);
+    // for some air-flow
+    move([-wx_bottom/2+off_corners,-wy_bottom/2+off_corners,-fuzz])
+      linear_extrude(h_cutouts) star(n=7, r=4, step=3);
+    move([-wx_bottom/2+off_corners,+wy_bottom/2-off_corners,-fuzz])
+      linear_extrude(h_cutouts) star(n=7, r=4, step=3);
+    move([+wx_bottom/2-off_corners,+wy_bottom/2-off_corners,-fuzz])
+      linear_extrude(h_cutouts) star(n=7, r=4, step=3);
   }
   // pcb-holder
-    move([0,-wy_bottom/2+w2+yo_holder,-fuzz])
-      cuboid([x_holder,w2,z_holder], anchor=BOTTOM+CENTER);  
+  move([0,-wy_bottom/2+w2+yo_holder,-fuzz])
+    cuboid([x_holder,w2,z_holder], anchor=BOTTOM+CENTER);
 }
 
 // --- wall for speaker   ----------------------------------------------------
