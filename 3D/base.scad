@@ -63,10 +63,15 @@ module wall_cutout() {
 
 module base() {
   // base-plate
+  r_ring = 2*ox_support;
+  w_ring = 5;
   difference() {
     regular_prism(6,h_bottom,x_bottom,chamfer2=c_bottom,
             anchor=BOTTOM+CENTER);
     wall_cutout();
+    zmove(-fuzz) ymove(oy_support)
+      linear_extrude(h_bottom+2*fuzz)
+       ring(r=r_ring, ring_width=w_ring, full=false, angle=[180,360]);
   }
   // support for motor
   motor_support();
