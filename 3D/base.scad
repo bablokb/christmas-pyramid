@@ -46,7 +46,7 @@ module post(h,r,twist=120) {
     zrot(-30) ymove(-pr_bottom+wxc_bottom)
         cuboid([wz_bottom+gap,10,h+b+fuzz], anchor=BOTTOM+BACK);
     // cutouts for LED-cable
-    zrot(-90) zmove(0.67*h+b) ymove(0)
+    zrot(-90) zmove(0.67*h+b) xrot(-8)
         cuboid([wz_bottom+gap,10,h/3+b+fuzz], anchor=BOTTOM+BACK);
   }
 }
