@@ -22,9 +22,10 @@ h_speaker  =  4.4;  // height of speaker
 
 x_sd =  18;         // size of SD-cutout
 y_sd =   7;         // printed, will be vertical later
-x_usb  = 12;        // size of USB-C
-y_usb  =  5;
-yo_usb = 16;        // offset from bottom
+
+x_usb  = 16;        // size of USB-C
+y_usb  = 10;
+yo_usb = 12;        // offset from bottom
 
 x_holder  = 24;     // pcb-holder
 yo_holder = pcb_holder_z() - b - wyc_bottom;
@@ -42,14 +43,19 @@ module wall_pcb() {
   off_corners = 6;
   h_cutouts = wz_bottom+2*fuzz;
   difference() {
-    wall();
+    union() {
+      wall();
+      move([0,-wy_bottom/2+y_usb/2+yo_usb,wz_bottom-fuzz])
+        cuboid([2*x_usb,y_usb-2*fuzz,0.75*w4], anchor=BOTTOM+CENTER);
+    }
     // cutouts
     // SD-card
     move([+wx_bottom/2-x_sd/2+fuzz,-wy_bottom/2+y_sd/2-fuzz,-fuzz])
       cuboid([x_sd,y_sd,h_cutouts], anchor=BOTTOM+CENTER);
     // USB-C
     move([0,-wy_bottom/2+y_usb/2+yo_usb,-fuzz])
-      cuboid([x_usb,y_usb,h_cutouts], anchor=BOTTOM+CENTER);
+      cuboid([x_usb,y_usb,wz_bottom+h_cutouts],
+             rounding=3, edges="Z", anchor=BOTTOM+CENTER);
     // for some air-flow
     move([-wx_bottom/2+off_corners,-wy_bottom/2+off_corners,-fuzz])
       linear_extrude(h_cutouts) star(n=7, r=4, step=3);
