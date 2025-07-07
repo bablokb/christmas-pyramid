@@ -65,3 +65,8 @@ wx_bottom = x_bottom-po_bottom -              // width of post-hexagon -
 	    - 2*gap;                          // - 2x gap
 wy_bottom = z_bottom-b + 2*wyc_bottom - gap;  // wall height (orthogonal)
 wz_bottom = 1.6;                              // wall height (printed flat)
+
+// ---------------------------------------------------------------------------
+// Scale factor of levels
+
+level_scale = 0.67;
