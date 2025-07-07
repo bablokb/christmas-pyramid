@@ -19,6 +19,10 @@ x_cutout = 10;
 y_cutout = d_holder + 10;
 z_cutout = 5;
 
+tx_cutout = 15;              // x of top cutout
+ty_cutout = 20;              // don't really care
+tz_cutout =  5;
+
 // --- holder   --------------------------------------------------------------
 
 module holder() {
@@ -44,6 +48,9 @@ module main() {
       cuboid([x_cutout,y_cutout,z_cutout], anchor=BOTTOM+CENTER);
     zmove(-fuzz) zrot(+45)
       cuboid([x_cutout,y_cutout,z_cutout], anchor=BOTTOM+CENTER);
+    // cutout for motor-cable
+    zmove(h_holder-tz_cutout+fuzz) ymove(d_holder/2)
+      cuboid([tx_cutout,ty_cutout,tz_cutout], anchor=BOTTOM+CENTER);
   }
 }
 
