@@ -38,7 +38,7 @@ module post(h,r,twist=120) {
         linear_extrude(h,twist=twist) star(n=8, r=r, step=2);
       }
       // cone above post
-      zmove(h-fuzz) cyl(zc_bottom,pc_bottom);
+      zmove(h-fuzz) cyl(zc_bottom,pc_bottom, anchor=BOTTOM+CENTER);
     }
     // cutouts for walls
     zrot(30) ymove(pr_bottom-wxc_bottom)
