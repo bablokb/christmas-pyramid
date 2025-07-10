@@ -70,3 +70,11 @@ wz_bottom = 1.6;                              // wall height (printed flat)
 // Scale factor of levels
 
 level_scale = 0.67;
+
+// ---------------------------------------------------------------------------
+// dimensions of level1
+
+x_level1 = level_scale*x_bottom;
+z_level1 = 60;
+z_level1_fence  = 20;
+
