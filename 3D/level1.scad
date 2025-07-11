@@ -44,10 +44,12 @@ module fence_post(r) {
     zmove(zc_bottom-fuzz) cyl(z_level1_fence-zc_bottom+2*fuzz,
                               r1=pc_bottom+gap, r2=2/3*pc_bottom+gap,
                               anchor=BOTTOM+CENTER);
-    // cutouts for walls
-    zrot(30) ymove(pr_bottom-wxc_bottom)
+    // cutouts for fences
+    zmove(zc_level1_fence)
+      zrot(30) ymove(pr_bottom-wxc_bottom)
         cuboid([wz_bottom+gap,10,z_level1_fence+fuzz], anchor=BOTTOM+FRONT);
-    zrot(-30) ymove(-pr_bottom+wxc_bottom)
+    zmove(zc_level1_fence)
+      zrot(-30) ymove(-pr_bottom+wxc_bottom)
         cuboid([wz_bottom+gap,10,z_level1_fence+fuzz], anchor=BOTTOM+BACK);
   }
 }
@@ -105,4 +107,5 @@ module level1() {
 intersection() {
   level1();
   //xmove(30) cuboid([100,200,10],anchor=BOTTOM+LEFT);
+  xmove(x_bottom-po_bottom) cyl(r=10, h=60,anchor=BOTTOM+CENTER);
 }
