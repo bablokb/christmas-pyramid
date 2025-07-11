@@ -77,4 +77,5 @@ level_scale = 0.67;
 x_level1 = level_scale*x_bottom;
 z_level1 = 60;
 z_level1_fence  = 20;
+zc_level1_fence  = 14;  // cutout for fences in post
 
