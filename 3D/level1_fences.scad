@@ -33,10 +33,18 @@ module fence() {
     for (i = [0 : 360]) [ i, cos(i)*y_mult+y_diff ],
     [ 360, 0 ]
   ];
-  // move to center bottom after extruding scaled polygon
-  move([-wx_bottom/2,-z_level1_fence/2,0])
-    linear_extrude(wz_bottom)
-      scale([wx_bottom/360,1/y_scale*z_level1_fence,1]) polygon(points);
+  difference() {
+    // move to center bottom after extruding scaled polygon
+    move([-wx_bottom/2,-z_level1_fence/2,0])
+      linear_extrude(wz_bottom)
+        scale([wx_bottom/360,1/y_scale*z_level1_fence,1]) polygon(points);
+    // fence posts are solid in the lower part, so remove some stuff
+    co_x = wxc_bottom+gap;
+    co_y = zc_level1_fence-b+fuzz;
+    xflip_copy()
+      move([-wx_bottom/2+co_x/2-fuzz,-z_level1_fence/2+co_y/2-fuzz,-fuzz])
+        cuboid([co_x,co_y,wz_bottom+2*fuzz], anchor=BOTTOM+CENTER);
+    }
   }
  
 // --- star fence   ----------------------------------------------------------
@@ -45,7 +53,7 @@ module fence() {
   difference() { 
     fence();
     xflip_copy()
-      move([-wx_bottom/3-5,+z_level1_fence/6,-fuzz])
+      move([-wx_bottom/3-4,+z_level1_fence/6,-fuzz])
         linear_extrude(h_cutout) star(n=7, r=4, step=step);
       move([0,-z_level1_fence/4+2,-fuzz])
         linear_extrude(h_cutout) star(n=7, r=4, step=step);
@@ -59,7 +67,7 @@ module fence() {
   difference() { 
     fence();
     xflip_copy()
-      move([-wx_bottom/3-5,-2,-fuzz])
+      move([-wx_bottom/3-3,-3,-fuzz])
         linear_extrude(h_cutout) scale([fac1,fac1,1]) candle2d();
     move([0,-5,-fuzz])
        linear_extrude(h_cutout) scale([fac2,fac2,1]) candle2d();
