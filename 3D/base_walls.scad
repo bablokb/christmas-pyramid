@@ -14,6 +14,7 @@
 include <BOSL2/std.scad>
 include <shared.scad>
 include <pcb_holder.scad>
+include <button_holder.scad>
 
 h_cutout = 1.2;     // six layers a 0.2
 rs_speaker = 3;     // stars for speaker
@@ -56,6 +57,11 @@ module wall_pcb() {
     move([0,-wy_bottom/2+y_usb/2+yo_usb,-fuzz])
       cuboid([x_usb,y_usb,wz_bottom+h_cutouts],
              rounding=3, edges="Z", anchor=BOTTOM+CENTER);
+    // cutout buttons
+    zmove(-fuzz)
+      ymove(wy_bottom/2-y_btn_holder/2-wyc_bottom)
+        hull() btn_holder(wz_bottom);
+
     // for some air-flow
     move([-wx_bottom/2+off_corners,-wy_bottom/2+off_corners,-fuzz])
       linear_extrude(h_cutouts) star(n=7, r=4, step=3);
@@ -67,6 +73,8 @@ module wall_pcb() {
   // pcb-holder
   move([0,-wy_bottom/2+w2+yo_holder,-fuzz])
     cuboid([x_holder,w2,z_holder], anchor=BOTTOM+CENTER);
+  // button-holder
+  ymove(wy_bottom/2-y_btn_holder/2-wyc_bottom) btn_holder(wz_bottom);
 }
 
 // --- wall for speaker   ----------------------------------------------------
@@ -74,7 +82,7 @@ module wall_pcb() {
 module wall_speaker() {
   difference() {
     wall();
-    // cutouts
+    // cutouts stars
     move([0,0,-fuzz])
       linear_extrude(wz_bottom+2*fuzz) star(n=7, r=rs_speaker, step=3);
     for (i = [2:2:4]) {
