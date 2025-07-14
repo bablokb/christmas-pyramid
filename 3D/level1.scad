@@ -11,8 +11,10 @@ include <BOSL2/std.scad>
 include <shared.scad>
 include <pcb_holder.scad>
 
-r_ttable = x_level1 - 2*po_bottom;
-g_ttable = 2;                           // gap
+r_ttable = x_level1 - 2*po_bottom;      // radius turn-table
+g_ttable = 2;                           // gap turn-table
+
+r2_fence_post = 1+gap;      // fence post top radius of cutout-cone
 
 // --- posts for next level of pyramid   -------------------------------------
 
@@ -38,11 +40,12 @@ module post(h,r,twist=120) {
 module fence_post(r) {
   difference() {
     regular_prism(6,z_level1_fence, r, anchor=BOTTOM+CENTER);
-    // internal cutout
+    // cutout base-post cone
     zmove(-fuzz) cyl(zc_bottom+fuzz, r=pc_bottom+gap,
                      anchor=BOTTOM+CENTER);
+    // cutout cylinder within fence-post
     zmove(zc_bottom-fuzz) cyl(z_level1_fence-zc_bottom+2*fuzz,
-                              r1=pc_bottom+gap, r2=2/3*pc_bottom+gap,
+                              r1=pc_bottom+gap, r2=r2_fence_post,
                               anchor=BOTTOM+CENTER);
     // cutouts for fences
     zmove(zc_level1_fence)
