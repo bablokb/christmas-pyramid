@@ -51,6 +51,26 @@ module post(h,r,twist=120) {
   }
 }
 
+// --- a single cable-holders   ----------------------------------------------
+
+module cable_holder() {
+  x_holder = 3*b; y_holder = 2*b; z_holder = 4*b;
+  zmove(x_holder/2+w4) yrot(90)
+    rect_tube(isize=[x_holder,y_holder],wall=w4,h=z_holder,anchor=CENTER);
+}
+
+// --- all cable-holders   ---------------------------------------------------
+
+module cable_holders() {
+  xflip_copy() {
+    zrot(0) xmove(x_bottom-2.5*po_bottom) cable_holder();
+    yflip_copy()
+      zrot(-60)
+        zrot(-30,cp=[x_bottom-po_bottom,0,0])
+          xmove(x_bottom-2.5*po_bottom) cable_holder();
+  }
+}
+
 // --- wall cutout   ---------------------------------------------------------
 
 module wall_cutout() {
@@ -84,6 +104,8 @@ module base() {
   for (r = [0:60:300]) {
     zrot(r) xmove(x_bottom-po_bottom) post(z_bottom,pr_bottom);
   }
+  // cable-holders
+  cable_holders();
 }
 
 // --- final shape   ---------------------------------------------------------
@@ -92,3 +114,4 @@ base();
 //post(z_bottom,pr_bottom);
 //pcb_holder(x_pcb=x_pcb,   y_pcb=y_pcb,
 //             xl_screw = xl_pcb, xr_screw = xr_pcb, y_screw = ys_pcb);
+//cable_holder();
