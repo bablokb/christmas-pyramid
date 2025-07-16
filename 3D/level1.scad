@@ -14,7 +14,7 @@ include <pcb_holder.scad>
 r_ttable = x_level1 - 2*po_bottom;      // radius turn-table
 g_ttable = 2;                           // gap turn-table
 
-r2_fence_post = 1+gap;      // fence post top radius of cutout-cone
+r2_fence_post = 1.5+gap;      // fence post top radius of cutout-cone
 
 // --- posts for next level of pyramid   -------------------------------------
 
@@ -49,10 +49,10 @@ module fence_post(r) {
                               anchor=BOTTOM+CENTER);
     // cutouts for fences
     zmove(zc_level1_fence)
-      zrot(30) ymove(pr_bottom-wxc_bottom)
+      zrot(30) ymove(pr_bottom-wxc_bottom-3*gap)
         cuboid([wz_bottom+gap,10,z_level1_fence+fuzz], anchor=BOTTOM+FRONT);
     zmove(zc_level1_fence)
-      zrot(-30) ymove(-pr_bottom+wxc_bottom)
+      zrot(-30) ymove(-pr_bottom+wxc_bottom+3*gap)
         cuboid([wz_bottom+gap,10,z_level1_fence+fuzz], anchor=BOTTOM+BACK);
   }
 }
