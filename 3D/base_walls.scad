@@ -25,8 +25,8 @@ x_sd =  18;         // size of SD-cutout
 y_sd =   7;         // printed, will be vertical later
 
 x_usb  = 16;        // size of USB-C
-y_usb  = 10;
-yo_usb = 12;        // offset from bottom
+y_usb  =  8;
+yo_usb = 13;        // offset from bottom
 
 x_holder  = 24;     // pcb-holder
 yo_holder = pcb_holder_z() - b - wyc_bottom;
@@ -71,7 +71,7 @@ module wall_pcb() {
       linear_extrude(h_cutouts) star(n=7, r=4, step=3);
   }
   // pcb-holder
-  move([0,-wy_bottom/2+w2+yo_holder,-fuzz])
+  move([0,-wy_bottom/2+wyc_bottom+w2+yo_holder,-fuzz])
     cuboid([x_holder,w2,z_holder], anchor=BOTTOM+CENTER);
   // button-holder
   ymove(wy_bottom/2-y_btn_holder/2-wyc_bottom) btn_holder(wz_bottom);
