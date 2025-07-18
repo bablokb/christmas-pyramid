@@ -28,6 +28,8 @@ yo_btn_cutout = 2.8;   // y-offset from lower edge
 x_btn_sup = (x_btn_pcb-x_btn_cutout)/2 - 2*gap;
 y_btn_sup = y_btn_holder;
 
+z_btn_chamfer = 2;
+
 // --- helper functions to expose dimensions   -------------------------------
 
 function btn_holder_dim(x) = x + gap + 2*w2;
@@ -47,11 +49,11 @@ module btn_base(h) {
 
 // --- button-pcb support   ---------------------------------------------------
 
-module btn_support(h) {
+module btn_support() {
   z_btn_sup = h_btn_pcb;
   cuboid([x_btn_sup,y_btn_sup,z_btn_sup],anchor=BOTTOM+CENTER);
   zmove(z_btn_sup-fuzz)
-    cyl(d=d_btn_screw-gap,h=z_btn_pcb,anchor=BOTTOM+CENTER);
+    cyl(d=d_btn_screw-gap,h=z_btn_pcb+z_btn_chamfer,anchor=BOTTOM+CENTER);
 }
 
 // --- button-holder   --------------------------------------------------------
@@ -62,10 +64,14 @@ module btn_holder(h) {
   // supports left and right
   xflip_copy()
     xmove(-x_btn_pcb/2+x_btn_sup/2)
-      btn_support(h);
+      btn_support();
   // tube
   rect_tube(size=[x_btn_holder,y_btn_holder],wall=w2,
-            h=h_btn_pcb+z_btn_pcb,anchor=BOTTOM+CENTER);
+            h=h_btn_pcb+z_btn_pcb+z_btn_chamfer,anchor=BOTTOM+CENTER);
+  // chamfer
+  move([0,-y_btn_holder/2+w2-fuzz,h_btn_pcb+z_btn_pcb+z_btn_chamfer/2])
+    xrot(-90) prismoid(size1=[x_btn_holder,z_btn_chamfer],
+                       size2=[x_btn_holder,0], h=z_btn_chamfer/2);
 }
 
 // --- test object   ---------------------------------------------------------
