@@ -41,11 +41,11 @@ module fence_post(r) {
   difference() {
     regular_prism(6,z_level1_fence, r, anchor=BOTTOM+CENTER);
     // cutout base-post cone
-    zmove(-fuzz) cyl(zc_bottom+fuzz, r=pc_bottom+gap,
+    zmove(-fuzz) cyl(zc_bottom+fuzz, r=pc_bottom+gap/2,
                      anchor=BOTTOM+CENTER);
     // cutout cylinder within fence-post
     zmove(zc_bottom-fuzz) cyl(z_level1_fence-zc_bottom+2*fuzz,
-                              r1=pc_bottom+gap, r2=r2_fence_post,
+                              r1=pc_bottom+gap/2, r2=r2_fence_post,
                               anchor=BOTTOM+CENTER);
     // cutouts for fences
     zmove(zc_level1_fence)
