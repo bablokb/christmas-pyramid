@@ -14,7 +14,8 @@ include <pcb_holder.scad>
 r_ttable = x_level1 - 2*po_bottom;      // radius turn-table
 g_ttable = 2;                           // gap turn-table
 
-r2_fence_post = 1.5 + gap;      // fence post top radius of cutout-cone
+r2_fence_post = 2.1;    // fence post top radius of cutout-cone
+r_cable_cutout = 1.7;   // cutout for cable from base through level1 to level2
 
 // --- posts for next level of pyramid   -------------------------------------
 
@@ -49,10 +50,10 @@ module fence_post(r) {
                               anchor=BOTTOM+CENTER);
     // cutouts for fences
     zmove(zc_level1_fence)
-      zrot(30) ymove(pr_bottom-wxc_bottom-3*gap)
+      zrot(30) ymove(pr_bottom-wxc_bottom)
         cuboid([wz_bottom+gap,10,z_level1_fence+fuzz], anchor=BOTTOM+FRONT);
     zmove(zc_level1_fence)
-      zrot(-30) ymove(-pr_bottom+wxc_bottom+3*gap)
+      zrot(-30) ymove(-pr_bottom+wxc_bottom)
         cuboid([wz_bottom+gap,10,z_level1_fence+fuzz], anchor=BOTTOM+BACK);
   }
 }
@@ -123,7 +124,7 @@ module level1() {
     }
     // cutout single post next level for cable
     zmove(-fuzz) zrot(60) xmove(x_level1-po_bottom)
-       cyl(h=z_level1+zc_bottom+2*fuzz,r=r2_fence_post,anchor=BOTTOM+CENTER);
+       cyl(h=z_level1+zc_bottom+2*fuzz,r=r_cable_cutout,anchor=BOTTOM+CENTER);
   }
 }
 
