@@ -14,7 +14,7 @@ include <pcb_holder.scad>
 r_ttable = x_level1 - 2*po_bottom;      // radius turn-table
 g_ttable = 2;                           // gap turn-table
 
-r2_fence_post = 1.5+gap;      // fence post top radius of cutout-cone
+r2_fence_post = 1.5 + gap;      // fence post top radius of cutout-cone
 
 // --- posts for next level of pyramid   -------------------------------------
 
@@ -71,13 +71,40 @@ module tt_plate(h_add,r_add) {
   cyl(h_add+h_bottom, r_add+r_ttable, anchor=BOTTOM+CENTER);
 }
 
+// --- lamp-shade (for fence-posts)   ----------------------------------------
+//
+// Note: print in vase-mode, nature/transparent PLA recommended
+
+module lamp_shade() {
+  r2 = r2_fence_post + 0.25;  // should be -something, but prints smaller
+  difference() {
+    union() {
+      cyl(h=10,r1=pr_bottom,
+          r2=r2,anchor=BOTTOM+CENTER);
+      cyl(h=15,r=r2,anchor=BOTTOM+CENTER);
+    }
+    zmove(-1) cyl(h=10,r1=pr_bottom-gap,r2=r2,anchor=BOTTOM+CENTER);
+  }
+}
+
 // --- level1 plate   --------------------------------------------------------
 
 module level1() {
   // plate
   difference() {
-    regular_prism(6,h_bottom,x_bottom,chamfer2=c_bottom,
-            anchor=BOTTOM+CENTER);
+    union() {
+      regular_prism(6,h_bottom,x_bottom,chamfer2=c_bottom,
+                    anchor=BOTTOM+CENTER);
+      // posts for the next level
+      for (r = [0:60:300]) {
+        zrot(r) xmove(x_level1-po_bottom) post(z_level1,pr_bottom);
+      }
+      // posts for the fence
+      for (r = [0:60:300]) {
+        zrot(r) xmove(x_bottom-po_bottom) fence_post(pr_bottom);
+      }
+    }
+ 
     // cutout for bottom wall
     wall_cutout();
     // cutout for cone of base posts
@@ -94,14 +121,9 @@ module level1() {
         xmove(x_level1 - po_bottom + (x_bottom-x_level1)/2)
          linear_extrude(h_bottom+2*fuzz) star(n=7, r=4, step=3);
     }
-  }
-  // posts for the next level
-  for (r = [0:60:300]) {
-    zrot(r) xmove(x_level1-po_bottom) post(z_level1,pr_bottom);
-  }
-  // posts for the fence
-  for (r = [0:60:300]) {
-    zrot(r) xmove(x_bottom-po_bottom) fence_post(pr_bottom);
+    // cutout single post next level for cable
+    zmove(-fuzz) zrot(60) xmove(x_level1-po_bottom)
+       cyl(h=z_level1+zc_bottom+2*fuzz,r=r2_fence_post,anchor=BOTTOM+CENTER);
   }
 }
 
@@ -110,5 +132,7 @@ module level1() {
 intersection() {
   level1();
   //xmove(30) cuboid([100,200,10],anchor=BOTTOM+LEFT);
-  xmove(x_bottom-po_bottom) cyl(r=10, h=60,anchor=BOTTOM+CENTER);
+  //xmove(x_bottom-po_bottom) cyl(r=10, h=60,anchor=BOTTOM+CENTER);
 }
+
+//lamp_shade();
