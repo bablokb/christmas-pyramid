@@ -30,6 +30,7 @@ boot_out.txt
 config.py
 ap_config.py
 log_config.py
+lib
 __pycache__
 
 *.stl
