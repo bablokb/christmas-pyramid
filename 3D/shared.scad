@@ -79,3 +79,6 @@ z_level1 = 60;
 z_level1_fence  = 20;
 zc_level1_fence  = 14;  // cutout for fences in post
 
+r_ttable = x_level1 - 2*po_bottom;               // radius turn-table
+g_ttable = 2;                                    // gap turn-table
+x_level1_post = sqrt(2)*(r_ttable+g_ttable);     // x position level1 post (rot=0)

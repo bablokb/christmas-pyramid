@@ -12,8 +12,6 @@
 include <BOSL2/std.scad>
 include <shared.scad>
 
-r_ttable = x_level1 - 2*po_bottom;      // radius turn-table
-
 z_moconn  = z2_shaft + z3_shaft;
 d1_moconn = 1.5*d2_shaft;
 d2_moconn = 20;
