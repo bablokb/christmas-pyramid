@@ -10,8 +10,8 @@
 include <BOSL2/std.scad>
 include <shared.scad>
 include <pcb_holder.scad>
+include <tt_plate.scad>
 
-r_ttable = x_level1 - 2*po_bottom;      // radius turn-table
 g_ttable = 2;                           // gap turn-table
 
 r2_fence_post = 2.1;    // fence post top radius of cutout-cone
@@ -66,12 +66,6 @@ module wall_cutout() {
       ring(n=6,r=x_bottom-po_bottom-wz_bottom/2-gap,ring_width=wz_bottom+2*gap);
 }
 
-// --- turntable plate   -----------------------------------------------------
-
-module tt_plate(h_add,r_add) {
-  cyl(h_add+h_bottom, r_add+r_ttable, anchor=BOTTOM+CENTER);
-}
-
 // --- lamp-shade (for fence-posts)   ----------------------------------------
 //
 // Note: print in vase-mode, nature/transparent PLA recommended
@@ -115,7 +109,7 @@ module level1() {
                          anchor=BOTTOM+CENTER);
     }
     // cutout turntable
-    zmove(-fuzz) tt_plate(2*fuzz,g_ttable);
+    zmove(-fuzz) tt_plate(2*fuzz,g_ttable,connector=false);
     // cutout stars for ventilation
     for (r = [0:60:300]) {
       zrot(r) zmove(-fuzz)
@@ -137,3 +131,4 @@ intersection() {
 }
 
 //lamp_shade();
+//color("blue") tt_plate();
