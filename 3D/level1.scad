@@ -12,8 +12,6 @@ include <shared.scad>
 include <pcb_holder.scad>
 include <tt_plate.scad>
 
-g_ttable = 2;                           // gap turn-table
-
 r2_fence_post = 2.1;    // fence post top radius of cutout-cone
 r_cable_cutout = 1.7;   // cutout for cable from base through level1 to level2
 
@@ -33,6 +31,12 @@ module post(h,r,twist=120) {
       // cone above post
       zmove(h-fuzz) cyl(zc_bottom,pc_bottom, anchor=BOTTOM+CENTER);
     }
+    // cutout for level1-walls
+    zrot(45) ymove(pr_bottom-wxc_bottom)
+        cuboid([wz_bottom+gap,10,h+b+fuzz], anchor=BOTTOM+FRONT);
+    zrot(-45) ymove(-pr_bottom+wxc_bottom)
+        cuboid([wz_bottom+gap,10,h+b+fuzz], anchor=BOTTOM+BACK);
+
   }
 }
 
@@ -91,8 +95,8 @@ module level1() {
       regular_prism(6,h_bottom,x_bottom,chamfer2=c_bottom,
                     anchor=BOTTOM+CENTER);
       // posts for the next level
-      for (r = [0:60:300]) {
-        zrot(r) xmove(x_level1-po_bottom) post(z_level1,pr_bottom);
+      for (r = [45:90:330]) {
+        zrot(r) xmove(x_level1_post) post(z_level1,pr_bottom);
       }
       // posts for the fence
       for (r = [0:60:300]) {
@@ -117,7 +121,7 @@ module level1() {
          linear_extrude(h_bottom+2*fuzz) star(n=7, r=4, step=3);
     }
     // cutout single post next level for cable
-    zmove(-fuzz) zrot(60) xmove(x_level1-po_bottom)
+    zmove(-fuzz) zrot(45) xmove(x_level1_post)
        cyl(h=z_level1+zc_bottom+2*fuzz,r=r_cable_cutout,anchor=BOTTOM+CENTER);
   }
 }
