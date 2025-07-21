@@ -60,7 +60,9 @@ async def main():
 # --- main program   ---------------------------------------------------------
 
 if config.DEBUG:
-  while not supervisor.runtime.serial_connected:
+  start = time.monotonic()
+  while (not supervisor.runtime.serial_connected and
+         time.monotonic() < start + config.WAIT4CONSOLE):
     time.sleep(1)
 
 asyncio.run(main())

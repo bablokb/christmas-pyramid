@@ -13,10 +13,11 @@ from uln2003a import GEAR_RATIO_16
 
 # --- setup   ----------------------------------------------------------------
 
-GEAR_RATIO = GEAR_RATIO_16
-DIRECTION  = 1
-RPM        = 6
-DEBUG      = True
+GEAR_RATIO   = GEAR_RATIO_16
+DIRECTION    = 1
+RPM          = 6
+DEBUG        = True
+WAIT4CONSOLE = 5      # in debug-mode, wait x secs for console
 
 # --- pin definitions   ------------------------------------------------------
 
