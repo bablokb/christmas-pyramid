@@ -24,8 +24,8 @@ class Leds(Base):
 
     # base-level lighting
     hal2 = JLed._DEFAULT_PWM_HAL(pin=pins_led[2],duty_scale=duty_led[2])
-    self._leds[2] = JLed(hal=hal2).on()
-    #self._leds[2] = JLed(hal=hal2).breathe(1000).delay_after(500).forever()
+    #self._leds[2] = JLed(hal=hal2).on()
+    self._leds[2] = JLed(hal=hal2).breathe(20000).delay_after(0).forever()
     #self._leds[2] = JLed(hal=hal2).candle(
     #  speed=5, jitter=100, period=0xFFFF)
 
@@ -40,6 +40,6 @@ class Leds(Base):
       for led in self._leds:
         if led:
           led.update()
-      await asyncio.sleep(0.1)
+      await asyncio.sleep(0.05)
       if stop_event.is_set():
         return
