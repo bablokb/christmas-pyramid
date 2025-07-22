@@ -100,6 +100,7 @@ class Player(Base):
         print(f"could not play {f}: {ex}")
       fstream.close()
       mp3.deinit()
+      self.next()
       await asyncio.sleep(0.5)
 
   # --- pause audio   --------------------------------------------------------
@@ -115,16 +116,16 @@ class Player(Base):
 
   def next(self):
     """ switch to next song """
-    self._current = (self_current + 1) % len(self._files)
+    self._current = (self._current + 1) % len(self._files)
 
   # --- previous song   ------------------------------------------------------
 
   def prev(self):
     """ switch to prev song """
     if self._current == 0:
-      self._current = len(channels) - 1
+      self._current = len(self._files) - 1
     else:
-      self._current = (self_current - 1)
+      self._current = (self._current - 1)
 
   # --- mute   ---------------------------------------------------------------
 
