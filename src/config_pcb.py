@@ -41,7 +41,7 @@ PINS_LED = [board.IO18,board.IO17,board.IO16]
 DUTY_LED = [0.5,0.5,0.5]
 
 # I2S
-PIN_MUTE   = board.IO38   
+PIN_MUTE   = board.IO38
 PINS_I2S   = [board.IO11,board.IO12,board.IO9,PIN_MUTE] # BLCK, WSEL, DATA
 
 # Buttons
