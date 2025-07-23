@@ -28,6 +28,7 @@ module fence() {
   y_scale = 50;
   y_mult  =  8;
   y_diff  = y_scale - y_mult;
+  z_fence = z_level1_fence - h_bottom;
   points = [
     [0,0],
     for (i = [0 : 360]) [ i, cos(i)*y_mult+y_diff ],
@@ -35,14 +36,14 @@ module fence() {
   ];
   difference() {
     // move to center bottom after extruding scaled polygon
-    move([-wx_bottom/2,-z_level1_fence/2,0])
+    move([-wx_bottom/2,-z_fence/2,0])
       linear_extrude(wz_bottom)
-        scale([wx_bottom/360,1/y_scale*z_level1_fence,1]) polygon(points);
+        scale([wx_bottom/360,1/y_scale*z_fence,1]) polygon(points);
     // fence posts are solid in the lower part, so remove some stuff
     co_x = wxc_bottom+gap;
     co_y = zc_level1_fence-b+fuzz;
     xflip_copy()
-      move([-wx_bottom/2+co_x/2-fuzz,-z_level1_fence/2+co_y/2-fuzz,-fuzz])
+      move([-wx_bottom/2+co_x/2-fuzz,-z_fence/2+co_y/2-fuzz,-fuzz])
         cuboid([co_x,co_y,wz_bottom+2*fuzz], anchor=BOTTOM+CENTER);
     }
   }
@@ -81,7 +82,7 @@ module fence() {
    factor = 0.3*wx_bottom/100;
    difference() { 
     fence();
-    zmove(-fuzz) ymove(-2)
+    zmove(-fuzz) ymove(-3)
         scale([factor,factor,h_cutout]) zrot(-10)
           import("input/star_of_bethlehem.stl");  // dim: 100x30.8x1
   }
@@ -107,30 +108,39 @@ module fence() {
 // --- camel fence   ---------------------------------------------------------
  
 module fence_camels() {
-  factor = 0.2*wx_bottom/100;
+  factor1 = 0.2*wx_bottom/100;
+  factor2 = 0.25*wy_bottom/100;
   difference() { 
     fence();
     xflip_copy()
       move([wx_bottom/4+5,-2,-fuzz])
-        scale([factor,factor,h_cutout])
+        scale([factor1,factor1,h_cutout])
           import("input/camel.stl");
-    xflip_copy()
-      move([wx_bottom/8,-5,-fuzz])
-        scale([0.5*factor,0.5*factor,h_cutout])
-          import("input/camel.stl");
+    move([0,-3.5,-fuzz])
+       scale([factor2,factor2,h_cutout])
+          import("input/camel_sitting.stl");
   }
 }
 
 // --- nativity fence   ------------------------------------------------------
  
  module fence_nativity() {
-   factor_x = 0.7*wx_bottom/100;
-   factor_y = 0.6*wx_bottom/100;
+   factor_x = 0.14*wx_bottom/100;
+   factor_y = 0.14*wx_bottom/100;
    difference() { 
     fence();
-    zmove(-fuzz) ymove(-3)
+    move([-18,-2.5,-fuzz])
+        scale([1.4*factor_x,1.4*factor_y,h_cutout])
+          xflip() import("input/donkey.stl");
+    move([-5,-2.5,-fuzz])
         scale([factor_x,factor_y,h_cutout])
-          import("input/nativity_fence.stl");  // dim: 100x30.8x1
+          import("input/mary.stl");
+    move([5,-2.5,-fuzz])
+        scale([factor_x,factor_y,h_cutout])
+          import("input/joseph.stl");
+    move([18,-2.5,-fuzz])
+        scale([1.4*factor_x,1.4*factor_y,h_cutout])
+          import("input/cow.stl");
   }
 }
 
