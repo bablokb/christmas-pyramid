@@ -58,7 +58,7 @@ po_bottom = 2*c_bottom+pr_bottom;             // offset of posts
 // ---------------------------------------------------------------------------
 // walls (printed flat, i.e. y is height (z) dimension
 
-wyc_bottom = 0.6;                             // cutout depth below walls
+wyc_bottom = 0.6;                             // cutout depth below/above walls
 wxc_bottom = pc_bottom;                       // cutout depth within posts
 wx_bottom = x_bottom-po_bottom -              // width of post-hexagon -
             2*(pr_bottom-wxc_bottom)          // 2x (radius-width_of_cutouts)
@@ -76,10 +76,19 @@ level_scale = 0.67;
 
 x_level1 = level_scale*x_bottom;
 z_level1 = 60;
+zc_level1 = z_level1/3;                          // cutout for walls in post
 z_level1_fence  = 20;
-zc_level1_fence  = 14;  // cutout for fences in post
+zc_level1_fence  = 14;                           // cutout for fences in post
 
 r_ttable = x_level1 - 2*po_bottom;               // radius turn-table
 g_ttable = 2;                                    // gap turn-table
 //x_level1_post = sqrt(2)*(r_ttable+g_ttable);   // hull fully outside turn-table
 x_level1_post = x_level1-po_bottom;              // hull intersects with turn-table
+
+// ---------------------------------------------------------------------------
+// walls level1 (printed flat, i.e. y is height (z) dimension
+
+wx_level1 = sqrt(2*x_level1_post^2) -            // side of square (c=sqrt(a^2+b^2)) -
+              2*(pr_bottom-wxc_bottom);          // 2x (radius-width_of_cutouts)
+wy_level1 = zc_level1 + wyc_bottom - gap/2;
+wz_level1 = wz_bottom;
