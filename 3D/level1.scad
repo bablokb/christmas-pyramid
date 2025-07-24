@@ -32,11 +32,10 @@ module post(h,r,twist=120) {
       zmove(h-fuzz) cyl(zc_bottom,pc_bottom, anchor=BOTTOM+CENTER);
     }
     // cutout for level1-walls
-    zrot(45) zmove(2/3*h) ymove(pr_bottom-wxc_bottom)
-        cuboid([wz_bottom+gap,10,h+b+fuzz], anchor=BOTTOM+FRONT);
-    zrot(-45) zmove(2/3*h) ymove(-pr_bottom+wxc_bottom)
-        cuboid([wz_bottom+gap,10,h+b+fuzz], anchor=BOTTOM+BACK);
-
+    zrot(45) zmove(h-zc_level1) ymove(pr_bottom-wxc_bottom)
+        cuboid([wz_level1+gap,10,h+b+fuzz], anchor=BOTTOM+FRONT);
+    zrot(-45) zmove(h-zc_level1) ymove(-pr_bottom+wxc_bottom)
+        cuboid([wz_level1+gap,10,h+b+fuzz], anchor=BOTTOM+BACK);
   }
 }
 
