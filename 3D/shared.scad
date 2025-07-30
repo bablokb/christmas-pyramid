@@ -92,3 +92,9 @@ wx_level1 = sqrt(2*x_level1_post^2) -            // side of square (c=sqrt(a^2+b
               2*(pr_bottom-wxc_bottom);          // 2x (radius-width_of_cutouts)
 wy_level1 = zc_level1 + wyc_bottom - gap/2;
 wz_level1 = wz_bottom;
+
+// ---------------------------------------------------------------------------
+// dimensions of level2
+
+z_level2_fence  = z_level1_fence;
+x_level2_fence  = w2;
