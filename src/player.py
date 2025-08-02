@@ -95,12 +95,15 @@ class Player(Base):
             return
           elif current != self._current:
             break
-        self._msg(f"finished or interrupted {f}")
+        if self._audio.playing or self._audio.paused:
+          self._msg(f"interrupted {f}")
+        else:
+          self._msg(f"finished {f}")
+          self.next()
       except Exception as ex:
         print(f"could not play {f}: {ex}")
       fstream.close()
       mp3.deinit()
-      self.next()
       await asyncio.sleep(0.5)
 
   # --- pause audio   --------------------------------------------------------
@@ -108,8 +111,10 @@ class Player(Base):
   def pause(self):
     """ toggle pause of audio """
     if self._audio.paused:
+      self._msg("pause: off")
       self._audio.resume()
     else:
+      self._msg("pause: on")
       self._audio.pause()
 
   # --- next song   ----------------------------------------------------------
@@ -117,6 +122,7 @@ class Player(Base):
   def next(self):
     """ switch to next song """
     self._current = (self._current + 1) % len(self._files)
+    self._msg(f"switching to next song ({self._files[self._current]})")
 
   # --- previous song   ------------------------------------------------------
 
@@ -126,6 +132,7 @@ class Player(Base):
       self._current = len(self._files) - 1
     else:
       self._current = (self._current - 1)
+    self._msg(f"switching to previous song ({self._files[self._current]})")
 
   # --- mute   ---------------------------------------------------------------
 
@@ -133,3 +140,4 @@ class Player(Base):
     """ drive mute-pin """
     if self._mute:
       self._mute.value = not value # active low, so change
+      self._msg(f"mute: {'off' if value else 'on'}")
