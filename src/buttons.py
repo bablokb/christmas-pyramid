@@ -37,22 +37,27 @@ class Buttons(Base):
 
   def _on_slower(self):
     """ decrease RPM of the motor """
+    self._msg("on_slower")
     self._motor.inc_rpm(-1)
 
   def _on_faster(self):
     """ increase RPM of the motor """
+    self._msg("on_faster")
     self._motor.inc_rpm(+1)
 
   def _on_prev(self):
     """ switch to previous song """
+    self._msg("on_prev")
     self._player.prev()
 
   def _on_next(self):
     """ switch to next song """
+    self._msg("on_next")
     self._player.next()
 
   def _on_pause(self):
     """ toggle pause """
+    self._msg("on_pause")
     self._player.pause()
 
   # --- button task   --------------------------------------------------------
