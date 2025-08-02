@@ -36,7 +36,7 @@ class Motor(Base):
 
   async def run(self, delay, stop_event):
     """ create motor task """
-  
+
     await asyncio.sleep(delay)
     self._motor = uln2003a.Uln2003aFullStep(*self._pins,
                                             self._gear_ratio,
@@ -49,11 +49,11 @@ class Motor(Base):
     self._motor.stop()
     self._motor.deinit()
 
-  # --- set RPM   ------------------------------------------------------------
+  # --- change RPM   ---------------------------------------------------------
 
-  def set_rpm(self,rpm):
-    """ set RPM value """
+  def inc_rpm(self,delta):
+    """ change RPM value """
 
-    self._rpm = rpm
+    self._msg(f"inc_rpm({delta})")
     if self._motor:
-      self._motor.set_rpm(rpm)
+      self._motor.inc_rpm(delta)
