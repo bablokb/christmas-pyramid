@@ -10,6 +10,8 @@
 include <BOSL2/std.scad>
 include <shared.scad>
 
+d_center = 2.6;   // diameter center hole (for SURS-2p plug)
+
 // --- post for fence   ------------------------------------------------------
 
 module fence_post(r) {
@@ -64,6 +66,15 @@ module level2() {
     // cutout cable from level1
     move([x_level1_post-pr_bottom/2,0,h_bottom-fuzz])
          cuboid([pr_bottom,pr_bottom-w2,pr_bottom], anchor=BOTTOM+CENTER);
+    // cutout for plate
+    zmove(2*h_bottom/3+fuzz)
+      cyl(r=x_level1_post-po_bottom/2,h=h_bottom/3,anchor=BOTTOM+CENTER);
+    // cutout für cable to center
+    zmove(h_bottom/3+fuzz)
+      cuboid([x_level1_post-po_bottom/2+gap,w4,h_bottom/3], anchor=BOTTOM+LEFT);
+    // cutout for hole in the center
+    zmove(-fuzz)
+      cyl(d=d_center,h=h_bottom+2*fuzz,anchor=BOTTOM+CENTER);
   }
 }
 
