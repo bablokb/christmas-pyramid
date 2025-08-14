@@ -10,7 +10,14 @@
 include <BOSL2/std.scad>
 include <shared.scad>
 
-d_center = 2.6;   // diameter center hole (for SURS-2p plug)
+d_center = 2.6;                     // diameter center hole (for SURS-2p plug)
+
+r_plate  = x_level1_post-po_bottom/2;  // center plate
+h_plate  = 2*h_bottom;
+
+x_conn =  7.1;
+y_conn = 11.5;
+z_conn = h_plate + 2*fuzz;
 
 // --- post for fence   ------------------------------------------------------
 
@@ -68,7 +75,7 @@ module level2() {
          cuboid([pr_bottom,pr_bottom-w2,pr_bottom], anchor=BOTTOM+CENTER);
     // cutout for plate
     zmove(2*h_bottom/3+fuzz)
-      cyl(r=x_level1_post-po_bottom/2,h=h_bottom/3,anchor=BOTTOM+CENTER);
+      cyl(r=r_plate,h=h_bottom/3,anchor=BOTTOM+CENTER);
     // cutout für cable to center
     zmove(h_bottom/3+fuzz)
       cuboid([x_level1_post-po_bottom/2+gap,w4,h_bottom/3], anchor=BOTTOM+LEFT);
@@ -78,11 +85,30 @@ module level2() {
   }
 }
 
+// --- plate   ---------------------------------------------------------------
+
+module plate() {
+  difference() {
+    cyl(r=r_plate-gap/2,h=h_plate, chamfer2=c_bottom, anchor=BOTTOM+CENTER);
+    // cutout for SURS-connector
+    zmove(-fuzz) xmove(r_plate-x_conn/2+fuzz)
+      cuboid([x_conn,y_conn,z_conn], anchor=BOTTOM+CENTER);
+    // cutout for cables or whatever needs space
+    xmove(-d_center) zmove(-fuzz)
+      cuboid([r_plate,y_conn,h_plate/2], anchor=BOTTOM+LEFT);
+  }
+}
+
 // --- final shape   ---------------------------------------------------------
 
-difference() {
-  level2();
-//  zmove(-fuzz) cyl(r=0.6*x_level1_post,
-//               h=h_bottom+2*fuzz,
-//                    anchor=BOTTOM+CENTER);
+//difference() {
+//  level2();
+////  zmove(-fuzz) cyl(r=0.6*x_level1_post,
+////               h=h_bottom+2*fuzz,
+////                    anchor=BOTTOM+CENTER);
+//}
+if ($preview) {
+  color("blue") zmove(h_bottom/3) plate();
+} else {
+   zmove(h_plate) zflip() plate();
 }
