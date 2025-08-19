@@ -35,10 +35,10 @@ PINS_SD = [
 
 # Pico
 PINS_SD = [
-  board.GP12,
-  board.GP11,
-  board.GP10,
-  board.GP9,
+  board.GP12,  # MISO
+  board.GP11,  # MOSI
+  board.GP10,  # CLK
+  board.GP9,   # CS
 ]
 
 # motor GPIOs
