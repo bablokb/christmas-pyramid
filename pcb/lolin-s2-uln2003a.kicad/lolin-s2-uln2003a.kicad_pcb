@@ -711,7 +711,7 @@
     (property "ki_keywords" "Connector")
     (path "/d649f27c-45ff-4cdd-bfc6-1fd79f525baf")
     (attr through_hole exclude_from_pos_files exclude_from_bom)
-    (fp_text reference "J9" (at 7.6 -1) (layer "F.SilkS")
+    (fp_text reference "J9" (at 7.6 -1) (layer "F.SilkS") hide
         (effects (font (size 1 1) (thickness 0.15)))
       (tstamp c9324cce-334c-40ec-9092-906b8b31236c)
     )
