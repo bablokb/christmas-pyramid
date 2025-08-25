@@ -9,14 +9,14 @@
 # ----------------------------------------------------------------------------
 
 import board
-from uln2003a import GEAR_RATIO_16
+from uln2003a import GEAR_RATIO_64
 
 # --- setup   ----------------------------------------------------------------
 
-GEAR_RATIO   = GEAR_RATIO_16
-DIRECTION    = 1
+GEAR_RATIO   = GEAR_RATIO_64
+DIRECTION    = -1
 RPM          = 6
-DEBUG        = True
+DEBUG        = False
 WAIT4CONSOLE = 5      # in debug-mode, wait x secs for console
 
 # --- pin definitions   ------------------------------------------------------
