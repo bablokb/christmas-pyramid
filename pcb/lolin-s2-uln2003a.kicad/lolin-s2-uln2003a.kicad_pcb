@@ -122,7 +122,7 @@
 
   (footprint "MountingHole:MountingHole_2.5mm" (layer "F.Cu")
     (tstamp 02a8543b-d188-4fa1-bf10-76e4f7889f16)
-    (at 118.13 116.1)
+    (at 118.29 116.1)
     (descr "Mounting Hole 2.5mm, no annular")
     (tags "mounting hole 2.5mm no annular")
     (property "Sheetfile" "lolin-s2-uln2003a.kicad_sch")
@@ -153,7 +153,7 @@
 
   (footprint "MountingHole:MountingHole_2.5mm" (layer "F.Cu")
     (tstamp 0a0cb29e-66c4-46f6-8160-1097c8c315e5)
-    (at 118.13 79.8)
+    (at 118.29 79.8)
     (descr "Mounting Hole 2.5mm, no annular")
     (tags "mounting hole 2.5mm no annular")
     (property "Sheetfile" "lolin-s2-uln2003a.kicad_sch")
