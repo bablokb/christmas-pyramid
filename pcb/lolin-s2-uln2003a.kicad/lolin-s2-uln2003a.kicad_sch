@@ -6,8 +6,8 @@
 
   (title_block
     (title "Lolin-S2-uln2003a Support PCB")
-    (date "2025-05-20")
-    (rev "1.00")
+    (date "2025-08-25")
+    (rev "1.01")
     (company "Bernhard Bablok")
     (comment 1 "https://github.com/bablokb/motor-turntable")
   )
@@ -3186,13 +3186,13 @@
     )
   )
 
-  (symbol (lib_id "Connector_Generic:Conn_01x05") (at 251.46 58.42 0) (unit 1)
+  (symbol (lib_id "Connector_Generic:Conn_01x05") (at 251.46 58.42 0) (mirror x) (unit 1)
     (in_bom no) (on_board yes) (dnp no)
     (uuid e5b64817-77e6-4f12-91ea-0892df3c9789)
-    (property "Reference" "J4" (at 250.19 45.72 0)
+    (property "Reference" "J4" (at 250.19 48.26 0)
       (effects (font (size 1.27 1.27)) (justify left))
     )
-    (property "Value" "Conn_Motor" (at 246.38 48.26 0)
+    (property "Value" "Conn_Motor" (at 246.38 45.72 0)
       (effects (font (size 1.27 1.27)) (justify left))
     )
     (property "Footprint" "Connector_JST:JST_XH_B5B-XH-A_1x05_P2.50mm_Vertical" (at 251.46 58.42 0)
