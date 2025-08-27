@@ -43,7 +43,7 @@ class Motor(Base):
                                             debug=self._debug)
     self._msg("starting rotation")
     asyncio.create_task(self._motor.rotate(self._direction,self._rpm))
-    self._msg("waiting for stop")
+    self._msg("motor: waiting for stop")
     await stop_event.wait()
     self._msg("stopping rotation")
     self._motor.stop()
