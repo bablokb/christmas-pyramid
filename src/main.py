@@ -20,23 +20,22 @@ from buttons import Buttons
 
 # --- configuration   --------------------------------------------------------
 
-#from config_breadboard import PIN_*
+#import config_breadboard as config
 import config_pcb as config
 
 # --- exit-processing   ------------------------------------------------------
 
-def at_exit(stop_event):
+def at_exit(stop_event,player):
   """ exit processing """
   if config.DEBUG:
     print("stopping tasks")
   stop_event.set()
+  player.stop()
 
 # --- main task   ------------------------------------------------------------
 
 async def main():
   """ main co-routine """
-  stop_event = asyncio.Event()
-  atexit.register(at_exit,stop_event)
 
   # individual controller objects
   motor = Motor(config.PINS_MOTOR,
@@ -44,9 +43,12 @@ async def main():
                 config.DIRECTION,
                 config.RPM,
                 config.DEBUG)
-  player = Player(config.PINS_I2S, config.PINS_SD, config.DEBUG)
+  player = Player(config.PINS_UART, config.VOLUME, config.DEBUG)
   buttons = Buttons(config.PINS_BUTTON, motor, player, config.DEBUG)
   leds = Leds(config.PINS_LED, config.DUTY_LED, config.DEBUG)
+
+  stop_event = asyncio.Event()
+  atexit.register(at_exit,stop_event,player)
 
   # start controller tasks and wait for end
   if config.DEBUG:
