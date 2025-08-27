@@ -25,7 +25,11 @@ WAIT4CONSOLE = 5      # in debug-mode, wait x secs for console
 PIN_SCL = board.IO13
 PIN_SDA = board.IO14
 
-# SD-card (SPI)
+# DFPlayer
+PINS_UART = [board.IO11, board.IO12]  # TX, RX
+VOLUME    = 95
+
+# SD-card (SPI, unused for DFPlayer)
 PINS_SD = [
   board.IO10,  # MISO
   board.IO6,   # MOSI
@@ -34,12 +38,12 @@ PINS_SD = [
 ]
 
 # Pico
-PINS_SD = [
-  board.GP12,  # MISO
-  board.GP11,  # MOSI
-  board.GP10,  # CLK
-  board.GP9,   # CS
-]
+#PINS_SD = [
+#  board.GP12,  # MISO
+#  board.GP11,  # MOSI
+#  board.GP10,  # CLK
+#  board.GP9,   # CS
+#]
 
 # motor GPIOs
 PINS_MOTOR = [board.IO39,board.IO37,board.IO35,board.IO33]
@@ -48,7 +52,7 @@ PINS_MOTOR = [board.IO39,board.IO37,board.IO35,board.IO33]
 PINS_LED = [board.IO18,board.IO17,board.IO16]
 DUTY_LED = [0.5,0.5,0.5]
 
-# I2S
+# I2S (unused for DFPlayer)
 PINS_MUTE  = None
 PINS_I2S   = [board.IO11,board.IO12,board.IO9] # BLCK, WSEL, DATA
 
