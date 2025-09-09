@@ -11,6 +11,8 @@ include <BOSL2/std.scad>
 include <shared.scad>
 include <pcb_holder.scad>
 
+ch_off = 0.6 * x_bottom;   // cable-holder offset
+
 // --- module post: cylinder with hole   -------------------------------------
 
 module motor_post() {
@@ -63,11 +65,11 @@ module cable_holder() {
 
 module cable_holders() {
   xflip_copy() {
-    zrot(0) xmove(x_bottom-2.5*po_bottom) cable_holder();
+    zrot(0) xmove(ch_off) cable_holder();
     yflip_copy()
       zrot(-60)
         zrot(-30,cp=[x_bottom-po_bottom,0,0])
-          xmove(x_bottom-2.5*po_bottom) cable_holder();
+          xmove(ch_off) cable_holder();
   }
 }
 
