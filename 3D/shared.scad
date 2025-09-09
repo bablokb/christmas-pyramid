@@ -35,8 +35,8 @@ z3_shaft = 6;
 x_pcb = 65.3;
 y_pcb = 42.3;
 
-xl_pcb = 22.41;    // x_screw left side
-xr_pcb = 22.41;    // x_screw right side
+xl_pcb = 25.09;    // x_screw left side
+xr_pcb = 19.73;    // x_screw right side
 ys_pcb = 3;        // y_screw
 
 // ---------------------------------------------------------------------------
