@@ -13,6 +13,14 @@ include <BOSL2/std.scad>
 z_pcb_def = 1.6;
 z_sup_def = 2.0;
 
+// dimensions special supports
+o_sup_l = 8.7;
+x_sup_l = w4;
+y_sup_l = 30.6;
+o_sup_r = 8.6;
+x_sup_r = w4;
+//y_sup_r = y_pcb;
+
 // --- helper functions to expose dimensions   -------------------------------
 
 function pcb_holder_dim(x) = x + 2*gap + 2*w4;
@@ -74,20 +82,19 @@ module pcb_holder(
   x_case = pcb_holder_dim(x_pcb);
   y_case = pcb_holder_dim(y_pcb);
 
-  difference() {
-    union() {
-      // base plate
-      cuboid([x_case,y_case,b],anchor=BOTTOM+CENTER);
-      // suport and screws
-      supports(x_pcb,y_pcb,x_support,y_support,b+z_support,
-               xl_screw,xr_screw,y_screw,supports);
-      screws(d_screw,x_pcb,y_pcb,b+z_support+z_pcb,xl_screw,xr_screw,y_screw,screws);
-      // walls around pcb
-      rect_tube(size=[x_case,y_case],wall=w4,h=b+z_pcb+z_support,anchor=BOTTOM+CENTER);
-    }
-    x_sd = 15;
-    move([-pcb_holder_dim(x_pcb)/2+x_sd/2+w4,
-          -pcb_holder_dim(y_pcb)/2+w2,
-          0]) cuboid([x_sd,2*w4,pcb_holder_z()+fuzz],anchor=BOTTOM+CENTER);
-  }
+  // base plate
+  cuboid([x_case,y_case,b],anchor=BOTTOM+CENTER);
+  // suport and screws
+  supports(x_pcb,y_pcb,x_support,y_support,b+z_support,
+           xl_screw,xr_screw,y_screw,supports);
+  screws(d_screw,x_pcb,y_pcb,b+z_support+z_pcb,xl_screw,xr_screw,y_screw,screws);
+  // walls around pcb
+  rect_tube(size=[x_case,y_case],wall=w4,h=b+z_pcb+z_support,anchor=BOTTOM+CENTER);
+  // special supports
+  ysl = y_sup_l + pcb_holder_dim(0);
+  move([-x_pcb/2+o_sup_l,-pcb_holder_dim(y_pcb)/2+ysl/2,0])
+    cuboid([x_sup_l,ysl,z_support+b],anchor=BOTTOM+CENTER);
+  ysr = pcb_holder_dim(y_pcb);
+  move([+x_pcb/2-o_sup_r,0,0])
+    cuboid([x_sup_r,ysr,z_support+b],anchor=BOTTOM+CENTER);
 }
