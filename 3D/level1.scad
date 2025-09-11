@@ -71,18 +71,13 @@ module wall_cutout() {
 
 // --- lamp-shade (for fence-posts)   ----------------------------------------
 //
-// Note: print in vase-mode, nature/transparent PLA recommended
+// Note: print in vase-mode, without bottom+top (nature/transparent PLA recommended)
 
 module lamp_shade() {
-  r2 = r2_fence_post + 0.25;  // should be -something, but prints smaller
-  difference() {
-    union() {
-      cyl(h=10,r1=pr_bottom,
-          r2=r2,anchor=BOTTOM+CENTER);
-      cyl(h=15,r=r2,anchor=BOTTOM+CENTER);
-    }
-    zmove(-1) cyl(h=10,r1=pr_bottom-gap,r2=r2,anchor=BOTTOM+CENTER);
-  }
+  r2 = r2_fence_post;
+  cyl(h=10,r1=pr_bottom,
+      r2=r2,anchor=BOTTOM+CENTER);
+  cyl(h=15,r=r2,anchor=BOTTOM+CENTER);
 }
 
 // --- level1 plate   --------------------------------------------------------
