@@ -1,9 +1,6 @@
 # For PCBs designed using KiCad: http://www.kicad-pcb.org/
 # Format documentation: http://kicad-pcb.org/help/file-formats/
 
-# src/lib because it is a symlink and the buildsystem copies the correct libs
-src/lib
-
 # Temporary files
 *.000
 *.bak
@@ -30,7 +27,6 @@ boot_out.txt
 config.py
 ap_config.py
 log_config.py
-lib
 __pycache__
 
 *.stl
