@@ -42,7 +42,7 @@ module btn_base(h) {
     cuboid([x_btn_holder,y_btn_holder,h],anchor=BOTTOM+CENTER);
     // cutout
     zmove(-fuzz)
-      ymove(-y_btn_pcb/2+y_btn_cutout/2+yo_btn_cutout)
+      ymove(+y_btn_pcb/2-y_btn_cutout/2-yo_btn_cutout)
         cuboid([x_btn_cutout,y_btn_cutout,h+2*fuzz],anchor=BOTTOM+CENTER);
   }
 }
@@ -69,8 +69,8 @@ module btn_holder(h) {
   rect_tube(size=[x_btn_holder,y_btn_holder],wall=w2,
             h=h_btn_pcb+z_btn_pcb+z_btn_chamfer,anchor=BOTTOM+CENTER);
   // chamfer
-  move([0,-y_btn_holder/2+w2-fuzz,h_btn_pcb+z_btn_pcb+z_btn_chamfer/2])
-    xrot(-90) prismoid(size1=[x_btn_holder,z_btn_chamfer],
+  move([0,+y_btn_holder/2-w2+fuzz,h_btn_pcb+z_btn_pcb+z_btn_chamfer/2])
+    xrot(90) prismoid(size1=[x_btn_holder,z_btn_chamfer],
                        size2=[x_btn_holder,0], h=z_btn_chamfer/2);
 }
 
