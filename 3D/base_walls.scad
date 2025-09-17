@@ -16,21 +16,24 @@ include <shared.scad>
 include <pcb_holder.scad>
 include <button_holder.scad>
 
-h_cutout = 1.2;     // six layers a 0.2
-rs_speaker = 3;     // stars for speaker
-d_speaker  = 29;    // speaker itself
-h_speaker  =  4.4;  // height of speaker
+h_cutout = 1.2;             // six layers a 0.2
+rs_speaker = 3;             // stars for speaker
+d_speaker  = 29;            // speaker itself
+h_speaker  =  4.4;          // height of speaker
 
-x_sd =  18;         // size of SD-cutout
-y_sd =   7;         // printed, will be vertical later
-
-x_usb  = 16;        // size of USB-C
+x_usb  = 16;                // size of USB-C
+xo_usb = (xr_pcb-xl_pcb)/2; // offset from center
 y_usb  =  8;
-yo_usb = 13;        // offset from bottom
+yo_usb = 13;                // offset from bottom
 
-x_holder  = 24;     // pcb-holder
-yo_holder = pcb_holder_z() - b - wyc_bottom;
-z_holder  =  8;
+x_sd  =  15;                // size of SD-cutout
+xo_sd =  xo_usb+24.5;       // offset from center
+y_sd  =   7;                // printed, will be vertical later
+yo_sd =   5;                // offset SD-card above PCB
+
+x_holder  = 24;             // pcb-holder
+yo_holder = pcb_holder_z() - b + wyc_bottom;   // pcb-level
+z_holder  = 7 + w4;
 
 // --- base wall   -----------------------------------------------------------
 
@@ -46,15 +49,17 @@ module wall_pcb() {
   difference() {
     union() {
       wall();
-      move([0,-wy_bottom/2+y_usb/2+yo_usb,wz_bottom-fuzz])
+      // addition for USB-C cutout
+      move([xo_usb,-wy_bottom/2+y_usb/2+yo_usb,wz_bottom-fuzz])
         cuboid([2*x_usb,y_usb-2*fuzz,0.75*w4], anchor=BOTTOM+CENTER);
     }
     // cutouts
     // SD-card
-    move([+wx_bottom/2-x_sd/2+fuzz,-wy_bottom/2+y_sd/2-fuzz,-fuzz])
-      cuboid([x_sd,y_sd,h_cutouts], anchor=BOTTOM+CENTER);
-    // USB-C
-    move([0,-wy_bottom/2+y_usb/2+yo_usb,-fuzz])
+    move([xo_sd,-wy_bottom/2+yo_holder+yo_sd,-fuzz])
+      cuboid([x_sd,y_sd,h_cutouts],
+              rounding=3, edges="Z",anchor=BOTTOM+CENTER);
+    // USB-C (not centered on pcb!)
+    move([xo_usb,-wy_bottom/2+y_usb/2+yo_usb,-fuzz])
       cuboid([x_usb,y_usb,wz_bottom+h_cutouts],
              rounding=3, edges="Z", anchor=BOTTOM+CENTER);
     // cutout buttons
@@ -71,8 +76,10 @@ module wall_pcb() {
       linear_extrude(h_cutouts) star(n=7, r=4, step=3);
   }
   // pcb-holder
-  move([0,-wy_bottom/2+wyc_bottom+w2+yo_holder,-fuzz])
-    cuboid([x_holder,w2,z_holder], anchor=BOTTOM+CENTER);
+  move([xo_usb,-wy_bottom/2+yo_holder,-fuzz])
+    color("blue") prismoid(size1=[x_holder,z_holder],
+             size2=[x_holder,w4],
+             shift=[0,-z_holder/2+w4/2], h=z_holder, anchor=BOTTOM+FRONT);
   // button-holder
   ymove(wy_bottom/2-y_btn_holder/2-wyc_bottom) btn_holder(wz_bottom);
 }
