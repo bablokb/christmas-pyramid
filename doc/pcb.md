@@ -24,6 +24,9 @@ Connectors (THT):
 This project neither uses the neo-pixel, the I2C-connector or the
 optional 2x5 IO-header.
 
+In the directory `production_files` you have ready to deploy files
+for JLCPCB.
+
 
 Schematic
 ---------
