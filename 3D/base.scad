@@ -100,7 +100,7 @@ module base() {
   // pcb-holder, moved and rotated to the back side
   ymove(y_bottom - pcb_holder_dim(y_pcb)/2 - po_bottom + gap)
     zrot(180)
-      pcb_holder(x_pcb=x_pcb,   y_pcb=y_pcb,
+      pcb_holder_special(x_pcb=x_pcb,   y_pcb=y_pcb,
                  xl_screw = xl_pcb, xr_screw = xr_pcb, y_screw = ys_pcb);
   // posts for the next level
   for (r = [0:60:300]) {
@@ -114,6 +114,6 @@ module base() {
 
 base();
 //post(z_bottom,pr_bottom);
-//pcb_holder(x_pcb=x_pcb,   y_pcb=y_pcb,
-//             xl_screw = xl_pcb, xr_screw = xr_pcb, y_screw = ys_pcb);
+//pcb_holder_special(x_pcb=x_pcb,   y_pcb=y_pcb,
+//                   xl_screw = xl_pcb, xr_screw = xr_pcb, y_screw = ys_pcb);
 //cable_holder();

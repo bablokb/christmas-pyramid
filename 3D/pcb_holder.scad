@@ -70,7 +70,7 @@ module screws(d,x_size,y_size,h_size,xl_screw,xr_screw,y_screw,screws) {
   }
 }
 
-// --- pcb-holder   ------------------------------------------------------------
+// --- pcb-holder (generic)   --------------------------------------------------
 
 module pcb_holder(
          x_pcb, y_pcb, z_pcb=z_pcb_def,
@@ -90,7 +90,22 @@ module pcb_holder(
   screws(d_screw,x_pcb,y_pcb,b+z_support+z_pcb,xl_screw,xr_screw,y_screw,screws);
   // walls around pcb
   rect_tube(size=[x_case,y_case],wall=w4,h=b+z_pcb+z_support,anchor=BOTTOM+CENTER);
-  // special supports
+}
+
+// --- pcb-holder   ------------------------------------------------------------
+
+module pcb_holder_special(
+         x_pcb, y_pcb, z_pcb=z_pcb_def,
+         x_support = 6.0, y_support = 6.0, z_support = z_sup_def, supports = [1,1,1,1],
+         xl_screw = 3, xr_screw = 3,
+         y_screw = 3, d_screw = 2.5, screws = [1,1,1,1]) {
+
+  // generic pcb_holder ...
+  pcb_holder(x_pcb, y_pcb, z_pcb,
+             x_support, y_support, z_support, supports,
+             xl_screw, xr_screw, y_screw, d_screw, screws);
+
+  // ... and special supports
   ysl = y_sup_l + pcb_holder_dim(0);
   move([-x_pcb/2+o_sup_l,-pcb_holder_dim(y_pcb)/2+ysl/2,0])
     cuboid([x_sup_l,ysl,z_support+b],anchor=BOTTOM+CENTER);
