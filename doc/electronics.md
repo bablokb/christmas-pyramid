@@ -62,7 +62,7 @@ relevant language.
 ![](./dfplayer.jpg)
 
 The alternative is to decode the MP3 in the microcontroller and output
-I2S to a small I2S-DAC (e.g. theMAX98357A). While this does works it
+I2S to a small I2S-DAC (e.g. the MAX98357A). While this does works it
 has a number of drawbacks. At least with the ESP32-S2 which I use the
 motor tends to stutter. A faster processor might not have this
 problem. The second drawback is the larger number of pins needed (four
@@ -79,14 +79,14 @@ The mcu must provide enough digital IO pins and must be fast
 enough. Something like the Pico should be fine. Depending on your
 setup, you need
 
-  - motor: 4 pins
-  - LEDs: 0-3 pins
-  - DFPlayer: 2+2 pins
-  - Buttons: 3 pins
+  - motor: 4 IO-pins
+  - LEDs: 0-3 IO-pins
+  - DFPlayer: 2 UART pins
+  - Buttons: 3 IO pins
 
-Since the DFPlayer provides two IOs, the remaining three buttons will
-control the turntable speed and pause the audio. If you want to
-control more functions, you need more.
+Since the DFPlayer provides two IOs, the IOs for the three buttons will
+control the turntable speed (slower/faster) and pause the audio.
+If you want to control more functions, you need more.
 
 This project uses the Lolin-S2 Mini. It provides many pins on a small
 footprint. As an added bonus, it could act as a webserver to enable
