@@ -115,13 +115,13 @@ Nativity Figures by [Peter Farell](https://www.printables.com/@PeterFarell):
   - Shephard: <https://www.printables.com/model/1064471-nativity-shepherd>
   - Sheep: <https://www.printables.com/model/1064503-nativity-sheep-set>
 
-Base walls (`../3D/base_walls.scad`):
+[Base walls](../3D/base_walls.scad):
 
   - Nativity scene: <https://www.printables.com/model/1117975-nativity-set>
   - Comet star (star of Bethlehem): <https://www.thingiverse.com/thing:4691295>
   - Angels: <https://www.printables.com/model/7671-angel-ornaments-for-your-window>
 
-Level1 fences: (`../3D/level1_fences.scad`)
+[Level1 fences](../3D/level1_fences.scad):
 
   - Comet star (star of Bethlehem): <https://www.thingiverse.com/thing:4691295>
   - Christmas tree (with star): <https://www.printables.com/model/333927-christmastree>
