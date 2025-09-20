@@ -3,6 +3,8 @@ Support PCB for Electronic Components
 
 This PCB allows you to put all components on a small footprint.
 
+![](../pcb/pcb.jpg)
+
 On board:
 
   - uln2003a motor driver

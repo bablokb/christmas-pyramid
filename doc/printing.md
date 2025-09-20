@@ -15,6 +15,8 @@ base and the levels are printed as skeletons without
 walls/fences. These are printed separately. This allows for different
 colors, makes silhouettes possible and also helps during assembly.
 
+![](./base.jpg)
+
 The basic geometric form is a regular hexagon. The side of the hexagon
 is the same as the outer-radius, this makes calculations easy. All
 major dimensions are a function of this size. The pyramid in the picture
@@ -30,6 +32,8 @@ wall). The second file has all the application level sizes.
 Depending on the electronic-parts you are using, you will most certainly
 need to modify the base-level, the wall for the speaker and the
 wall for the buttons/sd-card/USB-connector.
+
+![](./base+pcb+motor+speaker.jpg)
 
 
 Filaments
@@ -64,7 +68,12 @@ For the silhouettes I printed the first three layers with transparent
 PLA, the rest was printed in blue. You need to add a color change
 in the slicer after the third layer.
 
-![](silhouette.jpg)
+![](./silhouette.jpg)
+
+Cutouts were printed as is. The challenge was to find suitable models
+that don't have "islands" within the cutout.
+
+![](./level1_fence.jpg)
 
 The little lamp-shades on level1 were printed in vase-mode without top
 and bottom, again using transparent PLA. Since version 2.9.2
@@ -72,7 +81,7 @@ Prusa-Slicer supports sequential printing, so I could print all
 lamp-shades in one go. This greatly reduces the overhead time since
 bed-leveling is only needed once.
 
-![](lamp_shade.jpg)
+![](./lamp_shade.jpg)
 
 The nativity figures were downscaled to 40% and printed with a layer
 height of 0.15mm using tree supports (Prusa-Slicer calls this
@@ -81,14 +90,14 @@ need to take great care not to break anything. The only thing that did
 not survive was the rod of the young shepard. But this is due to
 downscaling, the rod is just too thin at 40%.
 
-![](nativity_figures.jpg)
+![](./nativity_figures.jpg)
 
 
 Models
 ------
 
 This project uses a number of models from other authors. The nativity
-figures are used as is (except downscaling). The other models are used
+figures were used as is (except downscaling). The other models were used
 for the walls and fences for cutouts and silhouettes. They were
 flattened (linear projection) and resized for this purpose. The remixes
 are in the directory [3D/input](../3D/input/README.md).
