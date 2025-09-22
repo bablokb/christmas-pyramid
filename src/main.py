@@ -44,7 +44,8 @@ async def main():
                 config.RPM,
                 config.DEBUG)
   player = Player(config.PINS_UART, config.VOLUME, config.DEBUG)
-  buttons = Buttons(config.PINS_BUTTON, motor, player, config.DEBUG)
+  buttons = Buttons(config.PINS_BUTTON, config.PINS_CB,
+                    motor, player, config.DEBUG)
   leds = Leds(config.PINS_LED, config.DUTY_LED, config.DEBUG)
 
   stop_event = asyncio.Event()
