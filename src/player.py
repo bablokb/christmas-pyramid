@@ -59,9 +59,11 @@ class Player(Base):
     if self._playing:
       self._msg("pause: on")
       self._dfplayer.pause()
+      self._playing = False
     else:
       self._msg("pause: off")
       self._dfplayer.play()
+      self._playing = True
 
   # --- mute   ---------------------------------------------------------------
 
