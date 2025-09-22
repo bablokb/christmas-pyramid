@@ -22,12 +22,19 @@ class Leds(Base):
     super().__init__(debug)
     self._leds = [None]*3
 
+    # top-level lighting
+    hal0 = JLed._DEFAULT_PWM_HAL(pin=pins_led[0],duty_scale=duty_led[0])
+    self._leds[0] = JLed(hal=hal0).on()
+
+    # level1 lighting
+    hal1 = JLed._DEFAULT_PWM_HAL(pin=pins_led[1],duty_scale=duty_led[1])
+    self._leds[1] = JLed(hal=hal1).candle(speed=5, jitter=100, period=0xFFFF)
+
     # base-level lighting
     hal2 = JLed._DEFAULT_PWM_HAL(pin=pins_led[2],duty_scale=duty_led[2])
-    #self._leds[2] = JLed(hal=hal2).on()
     self._leds[2] = JLed(hal=hal2).breathe(20000).delay_after(0).forever()
-    #self._leds[2] = JLed(hal=hal2).candle(
-    #  speed=5, jitter=100, period=0xFFFF)
+
+
 
   # --- LED task   -----------------------------------------------------------
 
