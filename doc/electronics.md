@@ -43,8 +43,14 @@ for the silhouettes uses standard 3mm LED-strips cut to the right length
 For the remaining lights, normal flicker-LEDs are a good choice. They are
 available pre-assembled with resistor and cables. Another option are
 components from a Lego lighting kit. The LEDs use very thin wires which
-makes building very easy. The drawback are the connectors they use. It
-is not trivial to attach them to a normal devboard.
+makes assembly easy. The drawback are the connectors they use. It
+is not trivial to attach them to a normal devboard, and even
+attaching them to standard (lego-lighting) components is fiddly.
+
+![](./lego_lighting.jpg)
+
+The pyramid in this project makes heavy use of them to distribute
+power to the upper levels through hallow posts.
 
 
 Music
