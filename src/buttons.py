@@ -11,12 +11,18 @@ import keypad
 import asyncio
 from base import Base
 
+CB_SLOWER = 0
+CB_FASTER = 1
+CB_PREV   = 2
+CB_PAUSE  = 3
+CB_NEXT   = 4
+
 class Buttons(Base):
   """ Button-Controller """
 
   # --- constructor   --------------------------------------------------------
 
-  def __init__(self, pins_buttons, motor, player, debug=False):
+  def __init__(self, pins_buttons, pins_cb, motor, player, debug=False):
     """ constructor """
 
     super().__init__(debug)
@@ -26,12 +32,15 @@ class Buttons(Base):
                              value_when_pressed=False,pull=True,
                              interval=0.1,max_events=4)
     self._key_events = self._keys.events
-    self._key_callbacks = [
+
+    # we might not use the full set of keys/callbacks
+    self._ALL_CALLBACKS = [
       self._on_slower,
       self._on_faster,
       self._on_prev,
       self._on_pause,
       self._on_next]
+    self._key_callbacks = [self._ALL_CALLBACKS[i] for i in pins_cb]
 
   # --- callbacks   ----------------------------------------------------------
 

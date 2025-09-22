@@ -10,6 +10,7 @@
 
 import board
 from uln2003a import GEAR_RATIO_16
+from buttons import CB_SLOWER, CB_FASTER, CB_PREV, CB_PAUSE, CB_NEXT
 
 # --- setup   ----------------------------------------------------------------
 
@@ -59,3 +60,4 @@ PINS_I2S   = [board.IO11,board.IO12,board.IO9] # BLCK, WSEL, DATA
 # Buttons
 PINS_BUTTON = [
 ]
+PINS_CB = []

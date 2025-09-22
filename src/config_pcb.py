@@ -10,6 +10,7 @@
 
 import board
 from uln2003a import GEAR_RATIO_64
+from buttons import CB_SLOWER, CB_FASTER, CB_PREV, CB_PAUSE, CB_NEXT
 
 # --- setup   ----------------------------------------------------------------
 
@@ -48,11 +49,10 @@ DUTY_LED = [0.5,0.5,0.5]
 PIN_MUTE   = board.IO38
 PINS_I2S   = [board.IO11,board.IO12,board.IO9,PIN_MUTE] # BLCK, WSEL, DATA
 
-# Buttons
+# Buttons (audio next/volup and prev/voldown are handled directly by DFPlayer)
 PINS_BUTTON = [
-  board.IO1,    # slower
-  board.IO2,    # faster
-  board.IO3,    # prev
-  board.IO5,    # pause
-  board.IO7,    # next
+  board.IO7,    # slower
+  board.IO5,    # faster
+  board.IO3,    # pause
 ]
+PINS_CB = [CB_SLOWER, CB_FASTER, CB_PAUSE]
