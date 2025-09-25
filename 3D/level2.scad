@@ -13,7 +13,12 @@ include <shared.scad>
 d_center = 2.6;                     // diameter center hole (for SURS-2p plug)
 
 r_plate  = x_level1_post-po_bottom/2;  // center plate
-h_plate  = 2*h_bottom;
+r_diff   = 5;                          // smaller upper radius
+h_plate  = b+7.5;
+
+x_spot = 7;          // size of spot
+y_spot = 7;
+z_spot = 3.4;
 
 x_conn =  7.1;
 y_conn = 11.5;
@@ -88,14 +93,27 @@ module level2() {
 // --- plate   ---------------------------------------------------------------
 
 module plate() {
+  r1 = r_plate-gap/2;
   difference() {
-    cyl(r=r_plate-gap/2,h=h_plate, chamfer2=c_bottom, anchor=BOTTOM+CENTER);
-    // cutout for SURS-connector
-    zmove(-fuzz) xmove(r_plate-x_conn/2+fuzz)
-      cuboid([x_conn,y_conn,z_conn], anchor=BOTTOM+CENTER);
-    // cutout for cables or whatever needs space
+    union() {
+      // bottom
+      zmove(h_plate-b) cyl(r=r1-r_diff, h=b, anchor=BOTTOM+CENTER);
+      // wall
+      tube(or1=r1, or2=r1-r_diff, wall=x_spot, h=h_plate, anchor=BOTTOM+CENTER);
+      // cable-channels
+      zmove(2*h_plate/3-b)  yflip_copy() xflip_copy()
+           ymove(r1/2) zrot(-30) xmove(r1/3) {
+             cuboid([r1/3,w2,b+h_plate/3], anchor=BOTTOM+CENTER);
+             ymove(-w4) cuboid([r1/3,w2,b+h_plate/3], anchor=BOTTOM+CENTER);
+           }
+    }
+    // cutout for cables coming from level1
     xmove(-d_center) zmove(-fuzz)
-      cuboid([r_plate,y_conn,h_plate/2], anchor=BOTTOM+LEFT);
+      cuboid([r_plate+d_center+fuzz,w4,h_plate/2], anchor=BOTTOM+LEFT);
+    // cutout for spots
+    yflip_copy()
+    zrot(-135) zmove(h_plate-z_spot+fuzz) xmove(r1-r_diff-x_spot/2+2)
+     cuboid([x_spot+3,y_spot,z_spot], anchor=BOTTOM+CENTER);
   }
 }
 
@@ -107,8 +125,7 @@ module plate() {
 ////               h=h_bottom+2*fuzz,
 ////                    anchor=BOTTOM+CENTER);
 //}
-if ($preview) {
-  color("blue") zmove(h_bottom/3) plate();
-} else {
-   zmove(h_plate) zflip() plate();
-}
+
+// flip for printing
+zmove(h_plate) zflip()
+  plate();
