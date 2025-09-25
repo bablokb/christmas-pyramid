@@ -40,6 +40,7 @@ class Player(Base):
     await asyncio.sleep(delay)
     self._playing = True
     self._dfplayer.random()
+    self._dfplayer.play()                 # needed on some versions of DFPlayer
     self._msg("player: waiting for stop")
     await stop_event.wait()
     self._msg("stop playing music")
