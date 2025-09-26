@@ -96,5 +96,5 @@ wz_level1 = wz_bottom;
 // ---------------------------------------------------------------------------
 // dimensions of level2
 
-z_level2_fence  = 0.5*z_level1_fence;
+z_level2_fence  = 15;
 x_level2_fence  = w2;
