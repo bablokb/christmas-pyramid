@@ -88,6 +88,9 @@ module level2() {
     zmove(-fuzz)
       cyl(d=d_center,h=h_bottom+2*fuzz,anchor=BOTTOM+CENTER);
   }
+  // cable-channels (add here, after difference()!)
+  zmove(2*h_bottom/3-fuzz) c_channels(r_plate-gap/2);
+
 }
 
 // --- cable-channels   ------------------------------------------------------
@@ -110,8 +113,6 @@ module plate() {
       zmove(h_plate-b) cyl(r=r1-r_diff, h=b, anchor=BOTTOM+CENTER);
       // wall
       tube(or1=r1, or2=r1-r_diff, wall=x_spot, h=h_plate, anchor=BOTTOM+CENTER);
-      // cable-channels
-      zmove(2*h_plate/3-b) c_channels(r1);
     }
     // cutout for cables coming from level1
     xmove(-d_center) zmove(-fuzz)
@@ -126,12 +127,12 @@ module plate() {
 // --- final shape   ---------------------------------------------------------
 
 //difference() {
-//  level2();
+  level2();
 ////  zmove(-fuzz) cyl(r=0.6*x_level1_post,
 ////               h=h_bottom+2*fuzz,
 ////                    anchor=BOTTOM+CENTER);
 //}
 
 // flip for printing
-zmove(h_plate) zflip()
-  plate();
+//zmove(h_plate) zflip()
+//  plate();
