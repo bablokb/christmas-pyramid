@@ -59,7 +59,7 @@ with a layer height of 0.2mm. There are a few exceptions though.
 ![](./led_strip.jpg)
 
 The led-strip holder was printed with PETG for higher thermal stability.
-The round level2-fence was printed with a layer hight of 0.15mm, as were
+The round level2-fence was printed with a layer hight of 0.10mm, as were
 the nativity figures.
 
 ![](./level2_fence.jpg)
