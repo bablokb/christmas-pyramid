@@ -90,6 +90,16 @@ module level2() {
   }
 }
 
+// --- cable-channels   ------------------------------------------------------
+
+module c_channels(r) {
+  yflip_copy() xflip_copy()
+   ymove(r/2) zrot(-30) xmove(r/3) {
+     cuboid([r/3,w2,b+h_plate/3], anchor=BOTTOM+CENTER);
+     ymove(-w4) cuboid([r/3,w2,b+h_plate/3], anchor=BOTTOM+CENTER);
+   }
+}
+
 // --- plate   ---------------------------------------------------------------
 
 module plate() {
@@ -101,11 +111,7 @@ module plate() {
       // wall
       tube(or1=r1, or2=r1-r_diff, wall=x_spot, h=h_plate, anchor=BOTTOM+CENTER);
       // cable-channels
-      zmove(2*h_plate/3-b)  yflip_copy() xflip_copy()
-           ymove(r1/2) zrot(-30) xmove(r1/3) {
-             cuboid([r1/3,w2,b+h_plate/3], anchor=BOTTOM+CENTER);
-             ymove(-w4) cuboid([r1/3,w2,b+h_plate/3], anchor=BOTTOM+CENTER);
-           }
+      zmove(2*h_plate/3-b) c_channels(r1);
     }
     // cutout for cables coming from level1
     xmove(-d_center) zmove(-fuzz)
