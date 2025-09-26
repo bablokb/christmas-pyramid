@@ -16,8 +16,8 @@ r_plate  = x_level1_post-po_bottom/2;  // center plate
 r_diff   = 5;                          // smaller upper radius
 h_plate  = b+7.5;
 
-x_spot = 7;          // size of spot
-y_spot = 7;
+x_spot = 8.1;          // size of spot
+y_spot = 8.1;
 z_spot = 3.4;
 
 x_conn =  7.1;
