@@ -18,6 +18,7 @@ y_pcb_uln2003a = 40.8;
 
 x_pcb_mcu = 18.1;
 y_pcb_mcu = 23.2;
+c_pcb_mcu = 10;        // cutout size USB-C connector
 
 x_pcb_dfplayer = 21;
 y_pcb_dfplayer = 21;
@@ -73,10 +74,19 @@ module base() {
       cylinder(h=b,d=d_bottom, anchor=BOTTOM+CENTER);
       // support for motor
       motor_support();
-      // pcb-holders
+      // pcb-holder motor-driver (uln2003a, blue version)
       xmove(-d_bottom/2+20) p_holder(x_pcb_uln2003a,y_pcb_uln2003a);
-      ymove(-d_bottom/2+pcb_holder_dim(y_pcb_mcu)/2 + 1.25*w4) 
+      // pcb-holder mcu (RP2040-Zero)
+      ymove(-d_bottom/2+pcb_holder_dim(y_pcb_mcu)/2 + 1.25*w4)
+        difference() {
           p_holder(x_pcb_mcu,y_pcb_mcu);
+          // cutout USB-C connector
+          ymove(-pcb_holder_dim(y_pcb_mcu)/2)
+            zmove(b-fuzz) cuboid([c_pcb_mcu,3*w4,pcb_holder_z()+2*fuzz],
+                                  anchor=BOTTOM+CENTER);
+        }
+      // pcb-holder DFPlayerMini (aligned with uln2003a)
+      // Note: this is mounted upside down, the SD-slot is on the bottom
       move([+d_bottom/2-20,
             -pcb_holder_dim(y_pcb_uln2003a)/2+pcb_holder_dim(y_pcb_dfplayer)/2,
             0])
@@ -94,12 +104,13 @@ module base() {
         cuboid([x_pcb_mcu-2*co_pcb,y_pcb_mcu-co_pcb,b+2*fuzz],
                anchor=BOTTOM+CENTER);  
     // cutout DFPlayer (flipped, SD-card is on bottom), first part
+    // for the DFPlayer itself
     move([+d_bottom/2-20,
             -pcb_holder_dim(y_pcb_uln2003a)/2+pcb_holder_dim(y_pcb_dfplayer),
             0.6])
         cuboid([x_pcb_dfplayer-2*co_pcb,2*y_pcb_dfplayer,b-0.6+fuzz],
                anchor=BOTTOM+CENTER);  
-    // cutout DFPlayer, second part
+    // cutout DFPlayer, second part for access to the SD-card
     move([+d_bottom/2-20,
             pcb_holder_dim(y_pcb_dfplayer)/2,
             -fuzz])
@@ -122,25 +133,25 @@ module inner_wall() {
 
 // --- final shape   ---------------------------------------------------------
 
-//base();
-//color("blue") inner_wall();
+base();
+color("blue") inner_wall();
 
 // test print mcu-holder
-intersection() {
-  base();
-  color("blue") ymove(-d_bottom/2+pcb_holder_dim(y_pcb_mcu)/2 -co_pcb/2 + 1.25*w4)
-    cuboid([pcb_holder_dim(x_pcb_mcu)+5,pcb_holder_dim(y_pcb_mcu)+5,20],
-               anchor=BOTTOM+CENTER);
-}
+//intersection() {
+//  base();
+//  color("blue") ymove(-d_bottom/2+pcb_holder_dim(y_pcb_mcu)/2 -co_pcb/2 + 1.25*w4)
+//    cuboid([pcb_holder_dim(x_pcb_mcu)+5,pcb_holder_dim(y_pcb_mcu)+5,20],
+//               anchor=BOTTOM+CENTER);
+//}
 
 // test print dfplayer-holder
-intersection() {
-  base();
-  color("blue")
-    move([+d_bottom/2-20,
-         -pcb_holder_dim(y_pcb_uln2003a)/2+pcb_holder_dim(y_pcb_dfplayer),
-         0])
-  
-    cuboid([pcb_holder_dim(x_pcb_dfplayer)+5,2*pcb_holder_dim(y_pcb_dfplayer)+5,20],
-               anchor=BOTTOM+CENTER);
-}
+//intersection() {
+//  base();
+//  color("blue")
+//    move([+d_bottom/2-20,
+//         -pcb_holder_dim(y_pcb_uln2003a)/2+pcb_holder_dim(y_pcb_dfplayer),
+//         0])
+//
+//    cuboid([pcb_holder_dim(x_pcb_dfplayer)+5,2*pcb_holder_dim(y_pcb_dfplayer)+5,20],
+//               anchor=BOTTOM+CENTER);
+//}
