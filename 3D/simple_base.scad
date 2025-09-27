@@ -8,8 +8,11 @@
 // ---------------------------------------------------------------------------
 
 include <BOSL2/std.scad>
-include <shared.scad>
+include <motor_dims.scad>
 include <pcb_holder.scad>
+
+z_delta    = 10;                      // additional motor height above ground
+z_support  = 2*(z_motor + z_delta);   // height of motor above base
 
 d_bottom = 120;
 
