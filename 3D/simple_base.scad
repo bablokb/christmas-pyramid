@@ -11,23 +11,28 @@ include <BOSL2/std.scad>
 include <motor_dims.scad>
 include <pcb_holder.scad>
 
+// --- dimensions of base   --------------------------------------------------
+
+d_bottom = 120;
+h_iwall = b + 6;      // height inner wall
+
+// --- specfic motor dimensions   --------------------------------------------
+
 z_delta    = 10;                      // additional motor height above ground
 z_support  = 2*(z_motor + z_delta);   // height of motor above base
 
-d_bottom = 120;
+// --- pcb dimensions   ------------------------------------------------------
 
-x_pcb_uln2003a = 21;
+co_pcb  = 3;             // cutout for PCB (diff to border)
+x_pcb_uln2003a = 21;     // ULN2003a driver board (blue version)
 y_pcb_uln2003a = 40.8;
 
-x_pcb_mcu = 18.1;
+x_pcb_mcu = 18.1;        // MCU (RP2040-Zero)
 y_pcb_mcu = 23.2;
-c_pcb_mcu = 10;        // cutout size USB-C connector
+c_pcb_mcu = 10;          // cutout size USB-C connector
 
-x_pcb_dfplayer = 21;
+x_pcb_dfplayer = 21;     // DFPlayer-Mini
 y_pcb_dfplayer = 21;
-
-h_iwall = b + 6;      // height inner wall
-co_pcb  = 3;          // cutout for PCB (diff to border)
 
 // --- module post: cylinder with hole   -------------------------------------
 
