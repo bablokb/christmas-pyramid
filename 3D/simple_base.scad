@@ -34,6 +34,11 @@ c_pcb_mcu = 10;          // cutout size USB-C connector
 x_pcb_dfplayer = 21;     // DFPlayer-Mini
 y_pcb_dfplayer = 21;
 
+// --- mini-speaker   --------------------------------------------------------
+
+d_speaker = 19 + 2*gap;
+h_speaker = 6;
+
 // --- module post: cylinder with hole   -------------------------------------
 
 module motor_post() {
@@ -74,16 +79,25 @@ module p_holder(x_pcb,y_pcb) {
 }
 
 // --- base plate   ----------------------------------------------------------
+// The base is a cylinder + motor-posts + pcb-holders + speaker-holder
+//                        - various cutouts
 
 module base() {
   difference() {
     union() {
       // base-plate
       cylinder(h=b,d=d_bottom, anchor=BOTTOM+CENTER);
+
       // support for motor
       motor_support();
+
+      // speaker
+      ymove(d_bottom/2-20)
+         tube(h=h_speaker,id=d_speaker, wall=w2, anchor=BOTTOM+CENTER);
+
       // pcb-holder motor-driver (uln2003a, blue version)
       xmove(-d_bottom/2+20) p_holder(x_pcb_uln2003a,y_pcb_uln2003a);
+
       // pcb-holder mcu (RP2040-Zero)
       ymove(-d_bottom/2+pcb_holder_dim(y_pcb_mcu)/2 + 1.25*w4)
         difference() {
@@ -93,12 +107,14 @@ module base() {
             zmove(b-fuzz) cuboid([c_pcb_mcu,3*w4,pcb_holder_z()+2*fuzz],
                                   anchor=BOTTOM+CENTER);
         }
+
       // pcb-holder DFPlayerMini (aligned with uln2003a)
       // Note: this is mounted upside down, the SD-slot is on the bottom
       move([+d_bottom/2-20,
             -pcb_holder_dim(y_pcb_uln2003a)/2+pcb_holder_dim(y_pcb_dfplayer)/2,
             0])
           p_holder(x_pcb_dfplayer,y_pcb_dfplayer);
+
       // lid for second DFPlayer cutout
         move([+d_bottom/2-20,
                 pcb_holder_dim(y_pcb_dfplayer)/2+w4,
@@ -106,11 +122,13 @@ module base() {
             cuboid([x_pcb_dfplayer,pcb_holder_dim(y_pcb_dfplayer),2.6],
                    anchor=BOTTOM+CENTER);  
     }
+
     // cutout MCU (chip is below PCB)
     zmove(-fuzz)
       ymove(-d_bottom/2+pcb_holder_dim(y_pcb_mcu)/2 -co_pcb/2 + 1.25*w4) 
         cuboid([x_pcb_mcu-2*co_pcb,y_pcb_mcu-co_pcb,b+2*fuzz],
                anchor=BOTTOM+CENTER);  
+
     // cutout DFPlayer (flipped, SD-card is on bottom), first part
     // for the DFPlayer itself
     move([+d_bottom/2-20,
@@ -118,6 +136,7 @@ module base() {
             0.6])
         cuboid([x_pcb_dfplayer-2*co_pcb,2*y_pcb_dfplayer,b-0.6+fuzz],
                anchor=BOTTOM+CENTER);  
+
     // cutout DFPlayer, second part for access to the SD-card
     move([+d_bottom/2-20,
             pcb_holder_dim(y_pcb_dfplayer)/2,
