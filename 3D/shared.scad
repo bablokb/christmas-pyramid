@@ -8,16 +8,13 @@
 // ---------------------------------------------------------------------------
 
 include <dimensions.scad>
+include <motor_dims.scad>
 
 // ---------------------------------------------------------------------------
-// motor support dimensions
-z_motor = 19;
+// individual motor support dimensions
 
-do_support = 7;                    // motor support
-di_support = 2.5;                  // screw: 2.6
-ox_support = 17.5;                 // offset of support: 35/2
-oy_support = -8;
-z_support  = z_motor + 10;
+z_delta    = 10;                      // additional height above ground
+z_support  = z_motor + z_delta;       // height of motor above base
 
 // ---------------------------------------------------------------------------
 // motor shaft dimensions
