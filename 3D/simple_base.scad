@@ -1,5 +1,5 @@
 // -----------------------------------------------------------------------------
-// 3D-Model (OpenSCAD): A minimal version of the pyramid.
+// 3D-Model (OpenSCAD): A minimal version of the pyramid (base)
 //
 // Author: Bernhard Bablok
 // License: GPL3
@@ -8,18 +8,9 @@
 // ---------------------------------------------------------------------------
 
 include <BOSL2/std.scad>
+include <simple_shared.scad>
 include <motor_dims.scad>
 include <pcb_holder.scad>
-
-// --- dimensions of base   --------------------------------------------------
-
-d_bottom = 120;
-h_iwall = b + 6;      // height inner wall
-
-// --- specfic motor dimensions   --------------------------------------------
-
-z_delta    = 10;                      // additional motor height above ground
-z_support  = 2*(z_motor + z_delta);   // height of motor above base
 
 // --- pcb dimensions   ------------------------------------------------------
 
