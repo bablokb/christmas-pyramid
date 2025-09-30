@@ -34,6 +34,10 @@ h_speaker = 6;
 
 module motor_post() {
   tube(h=z_support,od=do_support,id=di_support, anchor=BOTTOM+CENTER);
+  tube(h=z_support/2,
+       od1=2*do_support,id1=0,
+       od2=do_support,id2=0,
+       anchor=BOTTOM+CENTER);
 }
 
 // --- module motor-support   ------------------------------------------------
