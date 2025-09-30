@@ -54,7 +54,10 @@ module wall() {
                    anchor=BOTTOM+CENTER);
   // top ring
   color("aqua") zmove(h_base+h_cone+h_cone_sup-3*fuzz)
-    tube(h=h_ring,od=d_cone,id=d_cone-2*w2, anchor=BOTTOM+CENTER);
+    tube(h=h_ring,
+         od1=d_cone,id1=d_cone-2*w2,
+         od2=d_cone+2*h_ring,id2=d_cone+2*h_ring-2*w2,
+         anchor=BOTTOM+CENTER);
 }
 
 // --- final shape   ---------------------------------------------------------
