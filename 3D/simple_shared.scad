@@ -12,7 +12,9 @@ include <motor_dims.scad>
 
 // --- dimensions of base   --------------------------------------------------
 
-d_bottom = 120;
+d_bottom = 120;       // diameter bottom
+d_top = 72 + gap;     // diameter top (at top of cone)
+
 h_iwall = b + 6;      // height inner wall
 
 // --- specfic motor dimensions   --------------------------------------------

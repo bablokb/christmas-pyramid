@@ -30,7 +30,7 @@ h_cone_sup = 7;         // support cone for pixel-ring
 w_cone_sup = 4;         // width of support
 
 h_cone = h_wall-h_base-h_ring-h_cone_sup;   // main cone (bottom)
-d_cone = 72+gap;                            // diameter at top
+d_cone = d_top;                             // diameter at top
 
 x_cutout1 = 22 + gap;   // cutout for USB-C of MCU
 z_cutout1 = h_base;
@@ -52,7 +52,7 @@ module wall() {
     tube(h=h_cone_sup, od1=d_cone,id1=d_cone-2*w2,
                    od2=d_cone,id2=d_cone-8,
                    anchor=BOTTOM+CENTER);
-  // top ring
+  // top cone
   color("aqua") zmove(h_base+h_cone+h_cone_sup-3*fuzz)
     tube(h=h_ring,
          od1=d_cone,id1=d_cone-2*w2,
