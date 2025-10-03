@@ -10,7 +10,8 @@
 // ---------------------------------------------------------------------------
 
 include <BOSL2/std.scad>
-include <shared.scad>
+include <dimensions.scad>
+include <motor_dims.scad>
 
 z_moconn  = z2_shaft + z3_shaft;
 d1_moconn = 1.5*d2_shaft;
@@ -40,8 +41,8 @@ module motor_connector() {
 
 // --- turntable plate   -----------------------------------------------------
 
-module tt_plate(h_add=0,r_add=0,connector=true) {
-  cyl(h_add+h_bottom, r_add+r_ttable, anchor=BOTTOM+CENTER);
+module tt_plate(h,r,connector=true) {
+  cyl(h, r, anchor=BOTTOM+CENTER);
   if (connector) {
     zmove(b-fuzz)
       motor_connector();

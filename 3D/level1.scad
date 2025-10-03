@@ -107,7 +107,7 @@ module level1() {
                          anchor=BOTTOM+CENTER);
     }
     // cutout turntable
-    zmove(-fuzz) tt_plate(2*fuzz,g_ttable,connector=false);
+    zmove(-fuzz) tt_plate(h_bottom+2*fuzz,r_ttable+g_ttable,connector=false);
     // cutout stars for ventilation
     for (r = [0:60:300]) {
       zrot(r) zmove(-fuzz)
@@ -120,7 +120,7 @@ module level1() {
   }
 }
 
-// --- final shape   ---------------------------------------------------------
+// --- final shapes   --------------------------------------------------------
 
 intersection() {
   level1();
@@ -129,4 +129,4 @@ intersection() {
 }
 
 //lamp_shade();
-//color("blue") tt_plate();
+//color("blue") tt_plate(h_bottom,r_ttable);
