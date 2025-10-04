@@ -28,7 +28,8 @@ class Leds(Base):
 
     # level1 lighting
     hal1 = JLed._DEFAULT_PWM_HAL(pin=pins_led[1],duty_scale=duty_led[1])
-    self._leds[1] = JLed(hal=hal1).candle(speed=5, jitter=100, period=0xFFFF)
+    self._leds[1] = JLed(hal=hal1).candle(speed=5, jitter=100,
+                                          period=0xFFFF).forever()
 
     # base-level lighting
     hal2 = JLed._DEFAULT_PWM_HAL(pin=pins_led[2],duty_scale=duty_led[2])
