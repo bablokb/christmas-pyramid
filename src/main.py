@@ -16,49 +16,75 @@ import atexit
 from motor import Motor
 from player import Player
 from leds import Leds
+from neos import Neos
 from buttons import Buttons
 
 # --- configuration   --------------------------------------------------------
 
 #import config_breadboard as config
-import config_pcb as config
+import config_simple as config
+#import config_pcb as config
 
 # --- exit-processing   ------------------------------------------------------
 
-def at_exit(stop_event,player):
+def at_exit(stop_event,player,neos):
   """ exit processing """
   if config.DEBUG:
     print("stopping tasks")
   stop_event.set()
-  player.stop()
+  if player:
+    player.stop()
+  if neos:
+    neos.clear()
 
 # --- main task   ------------------------------------------------------------
 
 async def main():
   """ main co-routine """
 
-  # individual controller objects
-  motor = Motor(config.PINS_MOTOR,
-                config.GEAR_RATIO,
-                config.DIRECTION,
-                config.RPM,
-                config.DEBUG)
-  player = Player(config.PINS_UART, config.VOLUME, config.DEBUG)
-  buttons = Buttons(config.PINS_BUTTON, config.PINS_CB,
-                    motor, player, config.DEBUG)
-  leds = Leds(config.PINS_LED, config.DUTY_LED, config.DEBUG)
+  # individual controller objects and tasks
+  # tasks is a list of (obj,initial-delay)-pairs
+  tasks = []
+  if config.WITH_MOTOR:
+    motor = Motor(config.PINS_MOTOR,
+                  config.GEAR_RATIO,
+                  config.DIRECTION,
+                  config.RPM,
+                  config.DEBUG)
+    tasks.append((motor,0))
+  else:
+    motor = None
 
+  if config.WITH_PLAYER:
+    player = Player(config.PINS_UART, config.VOLUME, config.DEBUG)
+    tasks.append((player,0.2))
+  else:
+    player = None
+
+  if config.WITH_BUTTONS:
+    buttons = Buttons(config.PINS_BUTTON, config.PINS_CB,
+                      motor, player, config.DEBUG)
+    tasks.append((buttons,0))
+
+  if config.WITH_LEDS:
+    leds = Leds(config.PINS_LED, config.DUTY_LED, config.DEBUG)
+    tasks.append((leds,0.5))
+
+  if config.WITH_NEOPIXEL:
+    neos = Neos(config.PINS_NEO, config.DUTY_NEO, config.DEBUG)
+    tasks.append((neos,0.5))
+  else:
+    neos = None
+
+  # register atexit-processing (for development)
   stop_event = asyncio.Event()
-  atexit.register(at_exit,stop_event,player)
+  atexit.register(at_exit,stop_event,player,neos)
 
-  # start controller tasks and wait for end
+  # start configured controller tasks and wait for end
   if config.DEBUG:
     print("starting controller tasks")
-  await asyncio.gather(buttons.run(0,stop_event),
-                       motor.run(0,stop_event),
-                       player.run(0.2,stop_event),
-                       leds.run(0.5,stop_event)
-                       )
+  coprocs = [t[0].run(t[1],stop_event) for t in tasks]
+  await asyncio.gather(*coprocs)
 
 # --- main program   ---------------------------------------------------------
 

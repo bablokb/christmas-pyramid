@@ -4,8 +4,7 @@
 # Author: Bernhard Bablok
 # License: GPL3
 #
-# Website: https://github.com/bablokb/circuitpython-uln2003a
-#
+# Website: https://github.com/bablokb/christmas-pyramid
 # ----------------------------------------------------------------------------
 
 import board
@@ -19,6 +18,12 @@ DIRECTION    = 1
 RPM          = 6
 DEBUG        = True
 WAIT4CONSOLE = 5      # in debug-mode, wait x secs for console
+
+WITH_MOTOR    = True
+WITH_PLAYER   = True
+WITH_LEDS     = True
+WITH_BUTTONS  = False
+WITH_NEOPIXEL = False
 
 # --- pin definitions   ------------------------------------------------------
 
@@ -52,6 +57,10 @@ PINS_MOTOR = [board.IO39,board.IO37,board.IO35,board.IO33]
 # LED GPIOs
 PINS_LED = [board.IO18,board.IO17,board.IO16]
 DUTY_LED = [0.5,0.5,0.5]
+
+# NEO PINs (unused)
+PINS_NEO = (None,0)
+DUTY_NEO = 0.1
 
 # I2S (unused for DFPlayer)
 PINS_MUTE  = None
