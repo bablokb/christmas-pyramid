@@ -65,7 +65,7 @@ module wall_pcb() {
     // cutout buttons
     zmove(-fuzz)
       ymove(wy_bottom/2-y_btn_holder/2-wyc_bottom)
-        hull() btn_holder(wz_bottom);
+        hull() btn_holder(wz_bottom, 5);
 
     // for some air-flow
     move([-wx_bottom/2+off_corners,-wy_bottom/2+off_corners,-fuzz])
@@ -81,7 +81,7 @@ module wall_pcb() {
              size2=[x_holder,w4],
              shift=[0,-z_holder/2+w4/2], h=z_holder, anchor=BOTTOM+FRONT);
   // button-holder
-  ymove(wy_bottom/2-y_btn_holder/2-wyc_bottom) btn_holder(wz_bottom);
+  ymove(wy_bottom/2-y_btn_holder/2-wyc_bottom) btn_holder(wz_bottom, 5);
 }
 
 // --- wall for speaker   ----------------------------------------------------
