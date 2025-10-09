@@ -16,7 +16,6 @@ y_btn_pcb = 15.4;
 z_btn_pcb = 1.6;
 h_btn_pcb = 4.0;      // height of button-base
 
-y_btn_holder = y_btn_pcb + 2*w2 + gap;
 
 xo_btn_screw = 3.5;    // screw-hole offset from each side
 d_btn_screw  = 3.0;    // screw-hole diameter
@@ -25,9 +24,10 @@ x_btn_cutout = [0, 13.3, 0, 27.4, 34.5];   // x-dim button cutout
 y_btn_cutout = 6.3;    // y-dim button cutout (single row)
 yo_btn_cutout = 2.8;   // y-offset from lower edge
 
-y_btn_sup = y_btn_holder;
-
+y_btn_holder  = y_btn_pcb + 2*w2 + gap;
+y_btn_sup     = y_btn_holder;
 z_btn_chamfer = 2;
+h_btn_holder  = h_btn_pcb+z_btn_pcb+z_btn_chamfer;
 
 // --- helper functions to expose dimensions   -------------------------------
 
@@ -69,7 +69,7 @@ module btn_holder(h, n) {
       btn_support(n, x_dim_sup);
   // tube
   rect_tube(size=[x_btn_holder,y_btn_holder],wall=w2,
-            h=h_btn_pcb+z_btn_pcb+z_btn_chamfer,anchor=BOTTOM+CENTER);
+            h=h_btn_holder,anchor=BOTTOM+CENTER);
   // chamfer
   move([0,+y_btn_holder/2-w2+fuzz,h_btn_pcb+z_btn_pcb+z_btn_chamfer/2])
     xrot(90) prismoid(size1=[x_btn_holder,z_btn_chamfer],
