@@ -57,19 +57,19 @@ module btn_support(n, x_dim) {
 
 // --- button-holder   --------------------------------------------------------
 
-module btn_holder(h, n) {
+module btn_holder(h_base, n, h_add=0) {
   // dimensions
   x_btn_holder = x_btn_pcb[n-1] + 2*w2 + gap;
   x_dim_sup    = (x_btn_pcb[n-1]-x_btn_cutout[n-1])/2 - 2*gap;
   // base
-  btn_base(h, n, x_btn_holder);
+  btn_base(h_base, n, x_btn_holder);
   // supports left and right
   xflip_copy()
     xmove(-x_btn_pcb[n-1]/2+x_dim_sup/2)
       btn_support(n, x_dim_sup);
   // tube
   rect_tube(size=[x_btn_holder,y_btn_holder],wall=w2,
-            h=h_btn_holder,anchor=BOTTOM+CENTER);
+            h=h_btn_holder+h_add,anchor=BOTTOM+CENTER);
   // chamfer
   move([0,+y_btn_holder/2-w2+fuzz,h_btn_pcb+z_btn_pcb+z_btn_chamfer/2])
     xrot(90) prismoid(size1=[x_btn_holder,z_btn_chamfer],
