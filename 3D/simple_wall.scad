@@ -13,6 +13,7 @@ include <BOSL2/std.scad>
 include <simple_shared.scad>
 include <motor_dims.scad>
 include <pcb_holder.scad>
+include <button_holder.scad>
 
 // Wall height:
 //   the first term is the complete height from floor
@@ -60,10 +61,25 @@ module wall() {
          anchor=BOTTOM+CENTER);
 }
 
+// --- buttons   -------------------------------------------------------------
+
+module buttons() {
+ n_btn = 2;
+ x_btn = btn_holder_dim(x_btn_pcb[n_btn-1]);
+ y_btn = btn_holder_dim(y_btn_pcb);
+ zrot(135)
+   ymove(d_bottom/2-h_btn_holder/2) {
+    zmove(h_base)
+      zmove(y_btn/2) xrot(90) btn_holder(w2,n_btn);   // anchor=BOTTOM+BACK!
+   }
+}
+
 // --- final shape   ---------------------------------------------------------
 
+buttons();
 difference() {
   wall();
+  hull() buttons();
   zmove(-fuzz) ymove(d_bottom/2-w2)
     cuboid([x_cutout1,3*w2,z_cutout1], anchor=BOTTOM+CENTER);
   zmove(h_wall-h_ring-h_cone_sup) ymove(d_cone/2-w_cone_sup)
