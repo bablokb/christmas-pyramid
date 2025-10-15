@@ -1,10 +1,7 @@
 // -----------------------------------------------------------------------------
 // 3D-Model (OpenSCAD): A minimal version of the pyramid (wall).
 //
-// This model is optimized for two perimeters.
-//
-// The button-holder can be integrated, this needs more supports.
-// Or print the button-holder separately and add it later.
+// This model is optimized for two perimeters. Print with transparent PLA.
 //
 // Author: Bernhard Bablok
 // License: GPL3
@@ -16,7 +13,6 @@ include <BOSL2/std.scad>
 include <simple_shared.scad>
 include <motor_dims.scad>
 include <pcb_holder.scad>
-include <button_holder.scad>
 
 // Wall height:
 //   the first term is the complete height from floor
@@ -41,8 +37,6 @@ z_cutout1 = h_base;
 
 x_cutout2 = 10;         // cutout for pixel-ring wires
 
-h_btn_add  = 5;         // extra height of button-holder
-
 // --- wall   ----------------------------------------------------------------
 
 module wall() {
@@ -66,38 +60,12 @@ module wall() {
          anchor=BOTTOM+CENTER);
 }
 
-// --- buttons   -------------------------------------------------------------
-
-module buttons() {
- btn_base = w2;
- n_btn = 2;
- x_btn = btn_holder_dim(x_btn_pcb[n_btn-1]);
- y_btn = btn_holder_dim(y_btn_pcb);
- zrot(135)
-   ymove(d_bottom/2-w2) {
-    zmove(h_base+b)           // anchor=BOTTOM+BACK!
-      zmove(y_btn/2) xrot(90) btn_holder(btn_base,n_btn,h_btn_add);
-   }
-}
-
-module button_support() {
-  n_btn = 2;
-  x_btn = btn_holder_dim(x_btn_pcb[n_btn-1]);
-  zrot(135)
-   ymove(d_bottom/2-w2)
-     zmove(h_base)
-       cuboid([x_btn,h_btn_holder+h_btn_add,b], anchor=BOTTOM+BACK);
-}
-
 // --- final shape   ---------------------------------------------------------
 
 difference() {
   wall();
-  hull() buttons();
   zmove(-fuzz) ymove(d_bottom/2-w2)
     cuboid([x_cutout1,3*w2,z_cutout1], anchor=BOTTOM+CENTER);
   zmove(h_wall-h_ring-h_cone_sup) ymove(d_cone/2-w_cone_sup)
     cuboid([x_cutout2,w_cone_sup,2*h_cone_sup], anchor=BOTTOM+CENTER);
 }
-color("pink") button_support();    // not needed if buttons are included
-//buttons();                       // print separately and glue in
