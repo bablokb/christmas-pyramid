@@ -27,6 +27,7 @@ yo_btn_cutout = 2.8;   // y-offset from lower edge
 y_btn_holder  = y_btn_pcb + 2*w2 + gap;
 y_btn_sup     = y_btn_holder;
 z_btn_chamfer = 2;
+z_btn_base    = 1.6;   // standard wall-strength for button-holder
 h_btn_holder  = h_btn_pcb+z_btn_pcb+z_btn_chamfer;
 
 // --- helper functions to expose dimensions   -------------------------------
@@ -48,14 +49,15 @@ module btn_base(h, n, x_dim) {
 
 // --- button-pcb support   ---------------------------------------------------
 
-module btn_support(n, x_dim) {
-  z_btn_sup = h_btn_pcb;
+module btn_support(h_base, n, x_dim) {
+  z_btn_sup = h_btn_pcb + (h_base - z_btn_base);
   cuboid([x_dim,y_btn_sup,z_btn_sup],anchor=BOTTOM+CENTER);
   zmove(z_btn_sup-fuzz)
     cyl(d=d_btn_screw-gap,h=z_btn_pcb+z_btn_chamfer,anchor=BOTTOM+CENTER);
 }
 
 // --- button-holder   --------------------------------------------------------
+// Note: h_base > 1.6 will cause recessed buttons!
 
 module btn_holder(h_base, n, h_add=0) {
   // dimensions
@@ -66,18 +68,19 @@ module btn_holder(h_base, n, h_add=0) {
   // supports left and right
   xflip_copy()
     xmove(-x_btn_pcb[n-1]/2+x_dim_sup/2)
-      btn_support(n, x_dim_sup);
+      btn_support(h_base, n, x_dim_sup);
   // tube
   rect_tube(size=[x_btn_holder,y_btn_holder],wall=w2,
-            h=h_btn_holder+h_add,anchor=BOTTOM+CENTER);
+            h=h_btn_holder+h_add+(h_base-z_btn_base),anchor=BOTTOM+CENTER);
   // chamfer
-  move([0,+y_btn_holder/2-w2+fuzz,h_btn_pcb+z_btn_pcb+z_btn_chamfer/2])
+  move([0,+y_btn_holder/2-w2+fuzz,
+               h_btn_pcb+(h_base-z_btn_base)+z_btn_pcb+z_btn_chamfer/2])
     xrot(90) prismoid(size1=[x_btn_holder,z_btn_chamfer],
                        size2=[x_btn_holder,0], h=z_btn_chamfer/2);
 }
 
 // --- test object   ---------------------------------------------------------
 
-//btn_holder(1.6,5);
-//ymove(-20) btn_holder(1.6,2);
-//btn_holder(w2,2,5);
+//ymove(+20)  btn_holder(1.6,5);     // standard, 5 buttons
+//btn_holder(2.6,2,5);               // recessed, 2 buttons, extra height
+//ymove(-20) btn_holder(1.6,2);      // standard, 2 buttons
