@@ -128,9 +128,9 @@ module base() {
     // cutout DFPlayer (flipped, SD-card is on bottom), first part
     // for the DFPlayer itself
     move([+d_bottom/2-20,
-            -pcb_holder_dim(y_pcb_uln2003a)/2+pcb_holder_dim(y_pcb_dfplayer),
+            -pcb_holder_dim(y_pcb_uln2003a)/2+pcb_holder_dim(y_pcb_dfplayer)/2+w4,
             0.6])
-        cuboid([x_pcb_dfplayer-2*co_pcb,2*y_pcb_dfplayer,b-0.6+fuzz],
+        cuboid([x_pcb_dfplayer-2*co_pcb,y_pcb_dfplayer,b-0.6+fuzz],
                anchor=BOTTOM+CENTER);  
 
     // cutout DFPlayer, second part for access to the SD-card
