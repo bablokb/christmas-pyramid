@@ -78,6 +78,7 @@ module p_holder(x_pcb,y_pcb) {
 //                        - various cutouts
 
 module base() {
+  co_df2 = pcb_holder_dim(y_pcb_dfplayer) - 7;
   difference() {
     union() {
       // base-plate
@@ -112,9 +113,9 @@ module base() {
 
       // lid for second DFPlayer cutout
         move([+d_bottom/2-20,
-                pcb_holder_dim(y_pcb_dfplayer)/2+w4,
+                co_df2/2+w4,
                 b-fuzz])
-            cuboid([x_pcb_dfplayer,pcb_holder_dim(y_pcb_dfplayer),2.6],
+            cuboid([x_pcb_dfplayer,co_df2,2.6],
                    anchor=BOTTOM+CENTER);  
     }
 
@@ -134,9 +135,9 @@ module base() {
 
     // cutout DFPlayer, second part for access to the SD-card
     move([+d_bottom/2-20,
-            pcb_holder_dim(y_pcb_dfplayer)/2,
+            co_df2/2,
             -fuzz])
-        cuboid([x_pcb_dfplayer-2*co_pcb,pcb_holder_dim(y_pcb_dfplayer),b+1.6+fuzz],
+        cuboid([x_pcb_dfplayer-2*co_pcb,co_df2,b+1.6+fuzz],
                anchor=BOTTOM+CENTER);
   }
   // cable-holders
