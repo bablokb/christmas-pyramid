@@ -11,6 +11,7 @@ include <BOSL2/std.scad>
 include <simple_shared.scad>
 include <motor_dims.scad>
 include <pcb_holder.scad>
+include <button_holder.scad>
 
 // --- pcb dimensions   ------------------------------------------------------
 
@@ -71,6 +72,15 @@ module cable_holders() {
 
 module p_holder(x_pcb,y_pcb) {
  pcb_holder(x_pcb=x_pcb, y_pcb=y_pcb, screws=[0,0,0,0], supports=[0,0,0,0]);
+}
+
+// --- module buttons   ------------------------------------------------------
+
+module buttons() {
+  y_btn = btn_holder_dim(y_btn_pcb);
+  color("aqua")
+    ymove(y_btn) btn_holder(2.6,2);
+
 }
 
 // --- base plate   ----------------------------------------------------------
@@ -139,7 +149,12 @@ module base() {
             -fuzz])
         cuboid([x_pcb_dfplayer-2*co_pcb,co_df2,b+1.6+fuzz],
                anchor=BOTTOM+CENTER);
+
+    // cutout buttons
+    zmove(-fuzz) hull() buttons();
   }
+  // buttons
+  buttons();
   // cable-holders
   //cable_holders();
 }
