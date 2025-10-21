@@ -11,7 +11,7 @@ include <BOSL2/std.scad>
 include <dimensions.scad>
 
 //      n=   1     2  3     4     5     TODO: add size for 1 and 3 buttons
-x_btn_pcb = [0, 28.6, 0, 42.1, 49.1];
+x_btn_pcb = [0, 28.7, 0, 42.1, 49.1];
 y_btn_pcb = 15.4;
 z_btn_pcb = 1.6;
 h_btn_pcb = 4.0;      // height of button-base
