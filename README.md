@@ -1,9 +1,8 @@
 A 3D-printed, Motor-driven Christmas Pyramid
 ============================================
 
-**This is work in progress**
-
 ![](./doc/pyramid.jpg)
+
 
 Introduction
 ------------
@@ -17,6 +16,18 @@ minimizes cables.
 The electronics uses cheap parts that are widely available. The software is
 implemented in CircuitPython and mostly portable. The 3D build uses
 easy to print parts that can be assembled without glue.
+
+Besides the "big" version with multiple levels, a simplified version is
+also available:
+
+![](./doc/simple.jpg)
+
+The simplified version uses mainly the same electronics as the normal
+version of the pyramid, but the 3D-build is much simpler.
+
+
+Details
+-------
 
 Read about
 
