@@ -16,10 +16,16 @@ Installation
 ------------
 
 Just copy everything below `src/` to your device. Note that `src/lib`
-contains a number of precompiled libraries (adafruit_ticks and
-asyncio). These are CircuitPython version 9 libraries (also compatible
+contains a number of precompiled libraries:
+
+  - adafruit_pixelbuf
+  - adafruit_ticks
+  - asyncio
+  - neopixel
+
+These are CircuitPython version 9 libraries (also compatible
 with version 10). You might want to update these libraries if you have
-problems.
+problems (the recommended way is to use circup).
 
 
 Configuration
