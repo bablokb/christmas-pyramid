@@ -33,7 +33,7 @@ PIN_SDA = board.IO14
 
 # DFPlayer
 PINS_UART = [board.IO11, board.IO12]  # TX, RX
-VOLUME    = 95
+VOLUME    = 80
 
 # SD-card (SPI, unused for DFPlayer)
 PINS_SD = [
