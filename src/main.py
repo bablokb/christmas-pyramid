@@ -22,8 +22,8 @@ from buttons import Buttons
 # --- configuration   --------------------------------------------------------
 
 #import config_breadboard as config
-import config_simple as config
-#import config_pcb as config
+#import config_simple as config
+import config_pcb as config
 
 # --- exit-processing   ------------------------------------------------------
 
