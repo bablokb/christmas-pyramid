@@ -174,9 +174,15 @@ module wall_stars(step=3) {
 
 // --- main   ----------------------------------------------------------------
 
-//wall_stars();
-//wall_bethlehem();
-//wall_nativity();
-//wall_angels();
-//wall_speaker();
-wall_pcb();
+distribute(l=1.2*wy_bottom, dir=BACK) {
+  distribute(l=2.2*wx_bottom) {
+    wall_stars();
+    wall_bethlehem();
+    wall_nativity();
+  }
+  distribute(l=2.2*wx_bottom) {
+    wall_angels();
+    wall_speaker();
+    wall_pcb();
+  }
+}
