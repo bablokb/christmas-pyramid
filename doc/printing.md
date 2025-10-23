@@ -129,6 +129,10 @@ Nativity Figures by [Peter Farell](https://www.printables.com/@PeterFarell):
   - Camel (deleted): <https://www.printables.com/model/1282015-camel-low-poly>
   - Camel sitting, Mary, Joseph, donkey, cow: <https://www.printables.com/model/667692-nativity-scene>
 
+Miscellaneous:
+
+  - Amphora: <https://www.printables.com/model/817126-roman-clay-amphora>
+  - Treasure Chest: <https://www.printables.com/model/12111-treasure-chests-for-gloomhaven>
 
 Further Reading
 ---------------
