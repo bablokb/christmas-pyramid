@@ -20,6 +20,10 @@ pins broken out. The board has seven channels, four of them are
 necessary for the motor. The remaining three channels can be used to
 drive LEDs.
 
+Both the "blue" as the "green" driver boards have four useless LEDs
+that blink when the mcu sends data. If necessary, just remove the LEDs
+e.g. with pliers.
+
 If you want to turn more than one level, you probably need a stronger
 motor, e.g. a NEMA-17. Those motors also need a different voltage and
 a different driver board. In this case it is better to supply the 5V
@@ -66,6 +70,11 @@ UART-commands. Libraries for the DFPlayer are available for every
 relevant language.
 
 ![](./dfplayer.jpg)
+
+It seems that there are different version of the DFPlayer Mini around,
+some are counterfeits. Problems with initialization have been
+reported. On some (old?!) versions random playback does not seem to
+work.
 
 The alternative is to decode the MP3 in the microcontroller and output
 I2S to a small I2S-DAC (e.g. the MAX98357A). While this does works it
