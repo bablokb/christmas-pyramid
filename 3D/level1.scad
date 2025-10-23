@@ -128,5 +128,5 @@ intersection() {
   //xmove(x_bottom-po_bottom) cyl(r=10, h=60,anchor=BOTTOM+CENTER);
 }
 
-//lamp_shade();
+//xcopies (2*pr_bottom+2,6) lamp_shade();
 //color("blue") tt_plate(h_bottom,r_ttable);
