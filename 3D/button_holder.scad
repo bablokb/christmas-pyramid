@@ -1,5 +1,6 @@
 // ---------------------------------------------------------------------------
-// 3D-Model (OpenSCAD): Button-Holder for panel-mount buttons.
+// 3D-Model (OpenSCAD): Button-Holder for panel-mount buttons from
+//                      https://de.aliexpress.com/item/1005005656397975.html
 //
 // Author: Bernhard Bablok
 // License: GPL3
