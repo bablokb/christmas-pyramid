@@ -1,5 +1,5 @@
 // ---------------------------------------------------------------------------
-// 3D-Model (OpenSCAD): walls for level1
+// 3D-Model (OpenSCAD): walls for level1 (three variations)
 //
 // Author: Bernhard Bablok
 // License: GPL3
@@ -10,7 +10,7 @@
 include <BOSL2/std.scad>
 include <shared.scad>
 
-// --- level1 wall   --------------------------------------------------------
+// --- level1 wall0   -------------------------------------------------------
 
 module level1_wall0() {
   difference() {
@@ -27,6 +27,8 @@ module level1_wall0() {
   }
 }
 
+// --- level1 wall1   -------------------------------------------------------
+
 module level1_wall1() {
   difference() {
     cuboid([wx_level1,wy_level1,wz_level1], anchor=BOTTOM+CENTER);
@@ -35,6 +37,8 @@ module level1_wall1() {
       cylinder(h=wz_level1+2*fuzz,d=0.8*wy_level1, anchor=BOTTOM+CENTER);
   }
 }
+
+// --- level1 wall2   -------------------------------------------------------
 
 module level1_wall2() {
   d1 = 0.8*wy_level1;
@@ -54,6 +58,6 @@ module level1_wall2() {
   }
 }
 
-// --- test object   --------------------------------------------------------
+// --- final objects   --------------------------------------------------------
 
-level1_wall2();
+ycopies(wy_level1+2,4) level1_wall2();
