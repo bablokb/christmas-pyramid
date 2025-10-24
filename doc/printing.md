@@ -36,6 +36,46 @@ wall for the buttons/sd-card/USB-connector.
 ![](./base+pcb+motor+speaker.jpg)
 
 
+Mapping of OpenSCAD-files to Models
+-----------------------------------
+
+Base:
+
+  - base.scad
+    - base.stl
+  - base_walls.scad
+    - base_walls.stl
+  - led-strip-holder.scad
+    - led-strip-holder.stl
+
+Level 1:
+
+  - level1.scad
+    - level1.stl
+    - lamp_shades.stl
+    - tt_plate.stl
+  - level1_walls.scad
+    - level1_walls.stl
+  - level1_fences.scad
+    - level1_fences.stl
+
+Level 2:
+  - level2_fence.scad
+    - level2_fence.stl
+  - level2.scad
+    - level2.stl
+    - level2_plate.stl
+
+Simple Version:
+
+  - simple_base.scad
+    - simple_base.stl
+  - simple_wall.scad
+    - simple_wall.stl
+  - simple_plate.scad
+    - simple_plate.stl
+
+
 Filaments
 ---------
 
@@ -43,6 +83,7 @@ I used the following filaments:
 
   - BambuLab: Matte Ivory White (PLA)
   - Filament.de: Königsblau (PLA, royal blue)
+  - Filament.de: Kastanienbraun (PLA, chestnut)
   - Filament.de: Natur (PLA, transparent)
   - Filament.de: Weiß (PETG, white)
 
