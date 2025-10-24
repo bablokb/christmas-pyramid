@@ -145,9 +145,16 @@ module fence_camels() {
 }
 
 // --- final objects   -------------------------------------------------------
-//fence_stars();
-//fence_bethlehem();
-//fence_candles();
-//fence_trees();
-//fence_camels();
-fence_nativity();
+
+distribute(l=1.1*wx_bottom) {
+  distribute(l=wy_bottom, dir=BACK) {
+    fence_stars();
+    fence_bethlehem();
+    fence_candles();
+  }
+  distribute(l=wy_bottom, dir=BACK) {
+    fence_trees();
+    fence_camels();
+    fence_nativity();
+  }
+}
