@@ -79,6 +79,7 @@ class Buttons(Base):
     while True:
       await asyncio.sleep(0.5)
       if stop_event.is_set():
+        self._msg("stopping button processing")
         self._keys.deinit()
         return
       event = self._key_events.get()

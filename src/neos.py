@@ -96,6 +96,7 @@ class Neos(Base):
       self._pixels.show()
       await asyncio.sleep(ANIM_INTERVAL)
       if stop_event.is_set():
+        self._msg("stopping NEO animation")
         self.clear()
         return
 
