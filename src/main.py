@@ -11,7 +11,6 @@ import supervisor
 import time
 import board
 import asyncio
-import atexit
 
 from motor import Motor
 from player import Player
@@ -25,20 +24,9 @@ from buttons import Buttons
 #import config_simple as config
 import config_pcb as config
 
-# --- exit-processing   ------------------------------------------------------
-
-def at_exit(stop_event,player,neos):
-  """ exit processing """
-  if config.DEBUG:
-    print("stopping tasks")
-  stop_event.set()
-  if player:
-    player.stop()
-  if neos:
-    neos.clear()
-
 # --- main task   ------------------------------------------------------------
 
+_stop_event = asyncio.Event()
 async def main():
   """ main co-routine """
 
@@ -76,15 +64,23 @@ async def main():
   else:
     neos = None
 
-  # register atexit-processing (for development)
-  stop_event = asyncio.Event()
-  atexit.register(at_exit,stop_event,player,neos)
-
   # start configured controller tasks and wait for end
   if config.DEBUG:
     print("starting controller tasks")
-  coprocs = [t[0].run(t[1],stop_event) for t in tasks]
+  coprocs = [t[0].run(t[1],_stop_event) for t in tasks]
+
   await asyncio.gather(*coprocs)
+
+# --- cleanup task   ---------------------------------------------------------
+
+async def terminate():
+  """ wait for task termination """
+  if config.DEBUG:
+    print("running terminate()...")
+  _stop_event.set()
+  await asyncio.sleep(3)
+  if config.DEBUG:
+    print("finished terminate()")
 
 # --- main program   ---------------------------------------------------------
 
@@ -94,6 +90,16 @@ if config.DEBUG:
          time.monotonic() < start + config.WAIT4CONSOLE):
     time.sleep(1)
 
-asyncio.run(main())
+try:
+  asyncio.run(main())
+except KeyboardInterrupt:
+  if config.DEBUG:
+    print(f"interrupted!")
+except Exception as ex:
+  if config.DEBUG:
+    print(f"exception: {ex}")
+finally:
+  asyncio.run(terminate())
+
 if config.DEBUG:
   print("done running main")
