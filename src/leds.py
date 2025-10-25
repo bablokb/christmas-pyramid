@@ -50,4 +50,9 @@ class Leds(Base):
           led.update()
       await asyncio.sleep(0.05)
       if stop_event.is_set():
+        self._msg("stopping LED animation")
+        for led in self._leds:
+          if led:
+            led.off().update()
+            led.deinit()
         return
