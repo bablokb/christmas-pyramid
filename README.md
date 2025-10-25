@@ -1,8 +1,7 @@
 A 3D-printed, Motor-driven Christmas Pyramid
 ============================================
 
-![](./doc/pyramid.jpg)
-
+[![pyramid.mp4](./doc/pyramid.jpg)](./doc/pyramid.mp4?raw=true "Rotating Pyramid")
 
 Introduction
 ------------
