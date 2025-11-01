@@ -14,8 +14,8 @@ from uln2003a import GEAR_RATIO_16
 
 GEAR_RATIO   = GEAR_RATIO_16
 DIRECTION    = -1
-RPM          = 6
-DEBUG        = True
+RPM          = 7
+DEBUG        = False
 WAIT4CONSOLE = 5      # in debug-mode, wait x secs for console
 
 WITH_MOTOR    = True
@@ -28,7 +28,7 @@ WITH_NEOPIXEL = True
 
 # DFPlayer
 PINS_UART = [board.GP12, board.GP13]  # TX, RX
-VOLUME    = 80
+VOLUME    = 85
 
 # SD-card (SPI, unused for DFPlayer)
 PINS_SD = [
