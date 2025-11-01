@@ -18,7 +18,7 @@ import time
 from base import Base
 
 ANIM_INTERVAL  = 0.2   # change pixel-animation
-COLOR_CHANGE   = 5     # color change interval
+COLOR_CHANGE   = 1     # color change interval
 PIXEL_ON       = 1.0   # on-duration for every pixel
 PIXEL_SUBSET   = 0.25  # fraction of pixels to turn on every interval
 
