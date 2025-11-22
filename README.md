@@ -21,8 +21,9 @@ also available:
 
 ![](./doc/simple.jpg)
 
-The simplified version uses mainly the same electronics as the normal
-version of the pyramid, but the 3D-build is much simpler.
+This version only has three printed parts: the base, the wall and the
+plate. It uses a neopixel-ring instead of LEDs, otherwise
+it uses the same electronics as the normal version of the pyramid.
 
 
 Details
